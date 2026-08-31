@@ -103,10 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // GSAP Smooth Text Entrance Reveal
   // --------------------------------------------
   if (typeof gsap !== 'undefined') {
-    gsap.from('.status-badge', { opacity: 0, y: -20, duration: 1, delay: 0.2 });
-    gsap.from('.hero-title .line', { opacity: 0, y: 30, duration: 1.2, delay: 0.4, stagger: 0.15, ease: 'power3.out' });
-    gsap.from('.subtitle', { opacity: 0, y: 20, duration: 1, delay: 0.8 });
-    gsap.from('.btn', { opacity: 0, y: 20, duration: 0.8, delay: 1.0, stagger: 0.1 });
-    gsap.from('.footer', { opacity: 0, duration: 1, delay: 1.2 });
+    gsap.from('.hero-title .line', { opacity: 0, y: 30, duration: 1.2, delay: 0.4, ease: 'power3.out' });
   }
 });
