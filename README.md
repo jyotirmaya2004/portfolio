@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Jyotirmaya Behera — Portfolio
 
-## Getting Started
+A clean, minimal, multi-page portfolio website built with Next.js, TypeScript, and Tailwind CSS.
 
-First, run the development server:
+## Development
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm run lint
+```
 
-## Learn More
+## Pages
 
-To learn more about Next.js, take a look at the following resources:
+- `/` — Home (intro + social links)
+- `/about` — About
+- `/projects` — Projects
+- `/experience` — Experience
+- `/skills` — Skills
+- `/education` — Education
+- `/contact` — Contact
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Replacing Placeholders
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The following must be replaced with real values before deployment:
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Email**: `src/data/contact.ts` — `email`
+- **GitHub**: `src/data/contact.ts` — `github`
+- **LinkedIn**: `src/data/contact.ts` — `linkedin`
+- **Twitter**: `src/data/contact.ts` — `twitter`
+- **Project links**: `src/data/projects.ts` — `githubUrl` and `liveUrl` fields
+- **Resume**: Add a real resume. Currently no resume exists, so the Resume button is not shown.
+- **OG image / site URL**: `src/app/layout.tsx`
