@@ -77,7 +77,27 @@ body {
   -moz-osx-font-smoothing: grayscale;
   transition: background-color var(--transition-slow),
               color var(--transition-slow);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
+
+body * {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Allow selection and text editing in form inputs and textareas */
+input, textarea, [contenteditable="true"] {
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
+}
+
 
 /* ─── Global Theme Switch Transition ─────────────────────────── */
 html.theme-transition,
@@ -141,6 +161,24 @@ section[id] {
   animation: slide-in-right 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
   will-change: opacity, transform;
 }
+
+/* ─── Compact Menu Pop Animation ─────────────────────────────── */
+@keyframes menu-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.92) translateY(-6px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.animate-menu-pop {
+  animation: menu-pop 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: top right;
+  will-change: opacity, transform;
+}
+
 
 /* ─── Page Transition & Route Progress ───────────────────────── */
 @keyframes page-enter {

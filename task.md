@@ -1,138 +1,75 @@
-# Task — Portfolio Build Checklist
+# Task — Mobile Redesign · Gaming Level Timeline
 
-> Track progress phase by phase. Mark `[/]` when starting, `[x]` when done.
-
----
-
-## Phase 1 — Foundation & Structure
-
-- [ ] Initialize project folder structure (`css/`, `js/`, `assets/`, `assets/images/`)
-- [ ] Create `index.html` with semantic HTML5 shell (head, meta tags, CDN links)
-- [ ] Add SEO meta tags (title, description, OG tags, canonical)
-- [ ] Add Google Fonts preconnect + stylesheet (Playfair Display, Inter)
-- [ ] Add Material Symbols Outlined CDN link
-- [ ] Add Three.js r128 CDN script
-- [ ] Add GSAP 3 + ScrollTrigger CDN scripts (defer)
-- [ ] Create `css/tokens.css` — all CSS custom properties
-  - [ ] Color tokens (bg, ivory, accent, text, surfaces, outlines)
-  - [ ] Typography tokens (font-family, size, weight, line-height, tracking)
-  - [ ] Spacing tokens (margins, gutter, section-gap, element-gap)
-- [ ] Create `css/components.css` — base resets and component scaffolding
-- [ ] Create `css/animations.css` — `.reveal-text-container` / `.reveal-text-inner` pattern
+> **Goal:** Redesign Skills and Projects pages with a gaming level-progression timeline style.
+> No cards. No neon/glowing lights. Clean RPG chapter map, level unlock journey, game progress screen.
+> Status: Completed.
 
 ---
 
-## Phase 2 — HTML Sections
+## Phase 0 — Cleanup
 
-- [ ] Navigation — Fixed top bar with logo, nav links, theme toggle
-- [ ] Hero Section — Label chip, h1 (2-line staggered), subheading, CTA buttons, scroll indicator, Three.js slot
-- [ ] About Section — 12-col layout: label + editorial headline + 2x2 stats grid
-- [ ] Selected Work Section — Section header, alternating project cards
-  - [ ] Project card component: number, title, description, tags, case study link
-  - [ ] Fill with real project data
-- [ ] Experience Section — Light ivory background, vertical timeline
-  - [ ] Internship @ Infosys entry (current)
-- [ ] Skills Section — Tech icon/tag grid grouped by domain
-  - [ ] AI/ML group: Python, TensorFlow, PyTorch, Scikit-learn, LangChain
-  - [ ] Backend group: FastAPI, Node.js, PostgreSQL, Redis, Docker
-  - [ ] Frontend group: React, Next.js, TypeScript, Three.js, GSAP
-  - [ ] Cloud group: AWS, GCP, Azure, Kubernetes
-- [ ] Contact / Footer — Hero-scale CTA text, email button, copyright, social links
+- [x] **Remove Footer** — Delete `Footer.tsx` and remove all imports/references
+  - [x] Verify Footer removed from `src/app/layout.tsx`
+  - [x] Delete `src/components/Footer.tsx`
 
 ---
 
-## Phase 3 — CSS Styling
+## Phase 1 — Skills Page → Gaming Level Timeline
 
-- [ ] Global styles — body, *, ::selection, scroll-behavior
-- [ ] Navigation — glassmorphism, nav link hover (gold underline from center)
-- [ ] Hero — full-height, 12-col grid, label chip, h1 uppercase, scroll indicator pulse
-- [ ] About — stats grid styling, gold number sizing
-- [ ] Project Cards — image grayscale on hover, sharp edges, tag chips
-- [ ] Experience Timeline — vertical line, entry layout
-- [ ] Skills Grid — tag chips, domain grouping headers
-- [ ] Footer — large CTA text, button fill animation, bottom bar
-- [ ] Buttons — primary (gold fill) + ghost (border), fill animation ::before
-- [ ] Responsive — All sections mobile-first, 4-col grid collapse, adjusted font sizes
+> Replaced card grid with a vertical level-progression timeline — clean RPG skill-tree progression without neon or glow.
 
----
+- [x] **Rewrite `SkillsContent.tsx`**
+  - [x] **Layout**: Single vertical scrollable timeline (mobile-first & desktop responsive)
+  - [x] **Chapter markers**: Each category is a chapter sector (e.g. `CHAPTER I · Languages`) with clean HUD separator line
+  - [x] **Skill nodes on the timeline path**:
+    - [x] Vertical connecting rail running continuously down the left side
+    - [x] Checkpoint node on the rail for each skill
+    - [x] Skill icon in clean geometric container + bold skill name
+    - [x] Level indicator badge (`LVL 3 · MASTERED`, `LVL 2 · PROFICIENT`, `LVL 1 · ACQUIRED`)
+    - [x] Segmented XP proficiency bar filled using existing theme accent token
+  - [x] **Sector transitions**: `▼ NEXT SECTOR ▼` markers between chapters
+  - [x] **Top HUD bar**: Live summary showing unlocked count, max tier count, and character class
 
-## Phase 4 — JavaScript & Visual FX
-
-- [ ] `js/grain-shader.js` — WebGL grain background
-  - [ ] Canvas init (fixed, z-index: -2, pointer-events: none)
-  - [ ] Vertex + Fragment GLSL shaders (near-black base + gold sine noise)
-  - [ ] Resize handler (ResizeObserver)
-  - [ ] Render loop with u_time, u_resolution, u_mouse uniforms
-
-- [ ] `js/threejs-scene.js` — Three.js neural mesh (hero)
-  - [ ] Scene, camera, renderer setup (alpha: true)
-  - [ ] IcosahedronGeometry wireframe mesh (gold, opacity 0.3)
-  - [ ] IcosahedronGeometry point cloud (ivory, opacity 0.8)
-  - [ ] AmbientLight + PointLight (gold)
-  - [ ] Mouse interaction (mousemove -> lerp rotation)
-  - [ ] Auto-rotation animation loop
-  - [ ] Resize handler
-
-- [ ] `js/gsap-animations.js` — Scroll reveal animations
-  - [ ] Register ScrollTrigger plugin
-  - [ ] Hero text stagger reveal on page load
-  - [ ] Nav items reveal on load
-  - [ ] Section .gsap-reveal-text ScrollTrigger reveals
-  - [ ] Project card stagger animations
-  - [ ] Stats counter count-up animation
-
-- [ ] `js/cursor.js` — Custom gold ring cursor
-  - [ ] Create cursor DOM element (gold ring, 20x20)
-  - [ ] mousemove listener with lerp lag
-  - [ ] Hover state (expand to 40x40) on links, buttons, images
-  - [ ] Hide cursor on mobile/touch
-
-- [ ] `js/main.js` — Bootstrap all modules in correct init order
+- [x] **Update `src/data/skills.ts`**
+  - [x] Added `chapter` and `level` (1 | 2 | 3) to skill categories and items
 
 ---
 
-## Phase 5 — Assets & Content
+## Phase 2 — Projects Page → Gaming Level Timeline
 
-- [ ] Add real project screenshots to `assets/images/`
-- [ ] Write real project descriptions (title, tech stack, summary)
-- [ ] Add profile photo (optional)
-- [ ] Add downloadable resume PDF to `assets/resume.pdf`
-- [ ] Update all social links (GitHub, LinkedIn, Twitter/X)
-- [ ] Update email in contact CTA mailto:
-- [ ] Generate OG image for social sharing
+> Replaced cards with a vertical mission level timeline — no cards, clean quest log format.
 
----
+- [x] **Rewrite `ProjectsContent.tsx`**
+  - [x] **Layout**: Vertical scrollable level timeline — no card wrappers or card grids
+  - [x] **Timeline rail**: Continuous vertical line with circular numbered checkpoints (`01`, `02`, `03`, `04`)
+  - [x] **Mission entries**:
+    - [x] Level marker & classification: `LEVEL 01 // SMART INSPECTION & AI MONITORING PLATFORM`
+    - [x] Status badge: `[DEPLOYED]` / `[COMPLETED]`
+    - [x] Mission briefing / description text
+    - [x] Tech inventory: Clean inline dot-separated tags (`Next.js · TypeScript · PostgreSQL · WebRTC`) — no pills/cards
+    - [x] Action links: Clean textual links `[ LIVE TRANSMISSION ]` and `[ SOURCE REPO ]`
+  - [x] **Upcoming campaign marker**: `LEVEL 05 // UPCOMING MISSION` pending node at the end of the timeline
+  - [x] **Top HUD bar**: Active campaign status and completed level count
 
-## Phase 6 — Polish & QA
-
-- [ ] Cross-browser test (Chrome, Firefox, Safari)
-- [ ] Mobile responsiveness check (375px, 768px, 1440px)
-- [ ] Verify WebGL fallback (no error when unavailable)
-- [ ] Verify GSAP animations run smoothly (no jank)
-- [ ] Lighthouse audit — target: Performance >= 90, Accessibility >= 95
-- [ ] Verify all anchor links scroll correctly
-- [ ] Test contact email button opens mail client
-- [ ] Ensure no console errors in production
+- [x] **Update `src/data/projects.ts`**
+  - [x] Added `level`, `classification`, and `status` fields per project
 
 ---
 
-## Phase 7 — Deployment
+## Phase 3 — Mobile Navigation & Layout
 
-- [ ] Choose deployment target (GitHub Pages / Netlify / Vercel)
-- [ ] Set up repo on GitHub (jyotirmaya/portfolio)
-- [ ] Configure deployment (push-to-deploy or manual)
-- [ ] Add custom domain (if available)
-- [ ] Verify HTTPS is active
-- [ ] Submit sitemap to Google Search Console
+- [x] **Mobile bottom navigation removed** — No bottom bar; mobile navigation uses a clean top navbar with a simple hamburger drawer
+- [x] **Simplified Hamburger Menu** — Clean, lightweight mobile menu:
+  - Header with title and close button (removed large avatar photo, background pattern, and bulky card elements)
+  - Clean list of direct links (Home, About, Projects, Experience, Skills, Education, Contact)
+  - Inline footer links (GitHub, LinkedIn, Email)
+- [x] **ContactChat** — Floating trigger button placed in bottom-right corner (`bottom-4 right-4 sm:bottom-5 sm:right-5`)
+- [x] **No footer** anywhere across the entire website
 
 ---
 
-## Content to Gather
+## Phase 4 — QA & Verification
 
-- [ ] Real project list (name, description, tech stack, GitHub/live URL)
-- [ ] Internship details (Infosys, role, dates, key contributions)
-- [ ] Complete skills list
-- [ ] Email address for contact
-- [ ] GitHub profile URL
-- [ ] LinkedIn profile URL
-- [ ] Resume PDF (latest version)
+- [x] **Type check & Next.js production build** — `npm run build` compiled 100% cleanly (exit code 0)
+- [x] **Dark & light mode compatibility** — uses CSS theme variables (`--bg`, `--fg`, `--border`, `--accent`)
+- [x] **Mobile-first ergonomics** — left-anchored timeline rails ensure readable, comfortable scanning on small screens

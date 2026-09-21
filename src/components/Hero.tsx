@@ -113,9 +113,6 @@ export default function Hero() {
                 <p className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight text-[var(--fg)] truncate">
                   Jyotirmaya Behera
                 </p>
-                <p className="mt-1 text-sm sm:text-base font-normal text-[var(--fg-muted)] truncate">
-                  Integrated MCA Student at Utkal University
-                </p>
               </div>
             </div>
 
@@ -177,19 +174,6 @@ export default function Hero() {
                 </svg>
               </a>
             </div>
-
-            {/* Skills preview badges */}
-            <div className="mt-8 flex flex-wrap items-center gap-2" aria-label="Core skills">
-              <span className="text-xs uppercase tracking-wider font-medium text-[var(--fg-subtle)]">Core:</span>
-              {["Next.js", "TypeScript", "Python", "AI/ML", "PostgreSQL"].map((skill) => (
-                <span
-                  key={skill}
-                  className="px-3 py-1 text-xs font-medium text-[var(--accent)] bg-[var(--accent-light)]/50 rounded-full border border-[var(--accent)]/20 transition-all duration-200 hover:bg-[var(--accent-light)] hover:border-[var(--accent)]/40"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
           </div>
 
           {/* Desktop Profile Card: Premium circular frame */}
@@ -222,12 +206,6 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce md:bottom-8" aria-hidden="true">
-        <svg className="w-6 h-6 text-[var(--fg-subtle)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-        </svg>
-      </div>
     </section>
   );
 }

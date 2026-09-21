@@ -3,67 +3,99 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Image from "next/image";
-import { contactInfo } from "@/data/contact";
 import ThemeToggle from "@/components/ThemeToggle";
 
-const navItems = [
-  { label: "About",      href: "/about"      },
-  { label: "Projects",   href: "/projects"   },
-  { label: "Experience", href: "/experience" },
-  { label: "Skills",     href: "/skills"     },
-  { label: "Education",  href: "/education"  },
-  { label: "Contact",    href: "/contact"    },
+interface NavItem {
+  label: string;
+  href: string;
+  icon: React.ReactNode;
+}
+
+const navItems: NavItem[] = [
+  {
+    label: "Home",
+    href: "/",
+    icon: (
+      <svg className="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+      </svg>
+    ),
+  },
+  {
+    label: "About",
+    href: "/about",
+    icon: (
+      <svg className="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Projects",
+    href: "/projects",
+    icon: (
+      <svg className="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+      </svg>
+    ),
+  },
+  {
+    label: "Experience",
+    href: "/experience",
+    icon: (
+      <svg className="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Skills",
+    href: "/skills",
+    icon: (
+      <svg className="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    ),
+  },
+  {
+    label: "Education",
+    href: "/education",
+    icon: (
+      <svg className="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5" />
+      </svg>
+    ),
+  },
+  {
+    label: "Contact",
+    href: "/contact",
+    icon: (
+      <svg className="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+    ),
+  },
 ];
 
 function MenuIcon({ isOpen }: { isOpen: boolean }) {
   return (
-    <svg
-      className="w-5 h-5 transition-transform duration-300 ease-out"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-      style={{ transform: isOpen ? "rotate(90deg)" : "rotate(0deg)" }}
-    >
-      {isOpen ? (
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-      ) : (
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-      )}
-    </svg>
-  );
-}
-
-function GithubIcon() {
-  return (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
-    </svg>
-  );
-}
-
-function LinkedinIcon() {
-  return (
-    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path fillRule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clipRule="evenodd" />
-    </svg>
-  );
-}
-
-function MailIcon() {
-  return (
-    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-    </svg>
-  );
-}
-
-function ChevronRightIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg className={`w-5 h-5 text-[var(--fg-subtle)] ${className}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-    </svg>
+    <div className="relative w-5 h-5 flex items-center justify-center pointer-events-none" aria-hidden="true">
+      <span
+        className={`absolute h-0.5 w-4.5 bg-current rounded-full transition-all duration-300 ease-in-out ${
+          isOpen ? "rotate-45 translate-y-0" : "-translate-y-1.5"
+        }`}
+      />
+      <span
+        className={`absolute h-0.5 w-4.5 bg-current rounded-full transition-all duration-200 ease-in-out ${
+          isOpen ? "opacity-0 scale-x-0" : "opacity-100 scale-x-100"
+        }`}
+      />
+      <span
+        className={`absolute h-0.5 w-4.5 bg-current rounded-full transition-all duration-300 ease-in-out ${
+          isOpen ? "-rotate-45 translate-y-0" : "translate-y-1.5"
+        }`}
+      />
+    </div>
   );
 }
 
@@ -71,7 +103,8 @@ export default function Navbar() {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
+  const menuCardRef = useRef<HTMLDivElement>(null);
+  const toggleBtnRef = useRef<HTMLButtonElement>(null);
 
   /* Reset scroll state and close mobile menu on route change */
   useEffect(() => {
@@ -102,6 +135,24 @@ export default function Navbar() {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
+  /* Close mobile menu when clicking outside */
+  useEffect(() => {
+    if (!isMobileMenuOpen) return;
+    const handlePointerDown = (e: MouseEvent | TouchEvent) => {
+      const target = e.target as Node | null;
+      if (
+        menuCardRef.current &&
+        !menuCardRef.current.contains(target) &&
+        toggleBtnRef.current &&
+        !toggleBtnRef.current.contains(target)
+      ) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => document.removeEventListener("pointerdown", handlePointerDown);
+  }, [isMobileMenuOpen]);
+
   /* Detect scroll for glassmorphism effect */
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -109,12 +160,14 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const desktopNavItems = navItems.filter((item) => item.href !== "/");
+
   return (
     <>
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-[var(--bg)]/80 backdrop-blur-2xl border-b border-[var(--border)] shadow-sm"
+            ? "bg-[var(--bg)]/80 backdrop-blur-2xl border-b border-[var(--border)] shadow-xs"
             : "bg-transparent"
         }`}
         style={{ height: "var(--navbar-h)" }}
@@ -134,7 +187,7 @@ export default function Navbar() {
 
           {/* Desktop links */}
           <div className="hidden md:flex items-center gap-1" role="list">
-            {navItems.map((item) => {
+            {desktopNavItems.map((item) => {
               const isActive = pathname === item.href;
               return (
                 <Link
@@ -157,15 +210,17 @@ export default function Navbar() {
             </div>
           </div>
 
-          {/* Mobile Right Controls: Theme Toggle & Menu Button */}
-          <div className="flex md:hidden items-center gap-1">
+          {/* Mobile Right Controls: Theme Toggle & Menu Toggle */}
+          <div className="flex md:hidden items-center gap-1.5">
             <ThemeToggle />
             <button
-              className="flex items-center justify-center w-10 h-10 -mr-1 rounded-md text-[var(--fg)] hover:bg-[var(--bg-elevated)] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
+              ref={toggleBtnRef}
+              type="button"
+              className="flex items-center justify-center w-10 h-10 rounded-lg text-[var(--fg)] hover:bg-[var(--bg-elevated)] active:scale-95 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] touch-manipulation cursor-pointer"
               onClick={() => setIsMobileMenuOpen((prev) => !prev)}
               aria-expanded={isMobileMenuOpen}
-              aria-controls="mobile-menu"
-              aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-controls="mobile-menu-capsule"
+              aria-label={isMobileMenuOpen ? "Close menu" : "Open navigation menu"}
             >
               <MenuIcon isOpen={isMobileMenuOpen} />
             </button>
@@ -173,151 +228,75 @@ export default function Navbar() {
         </nav>
       </header>
 
-      {/* Premium Mobile Menu Overlay */}
+      {/* Pure, Ultra-Compact Floating Capsule Menu for Mobile */}
       {isMobileMenuOpen && (
         <>
-          {/* Backdrop */}
+          {/* Subtle Dimmed Backdrop */}
           <div
-            className="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden animate-fade-in"
+            className="fixed inset-0 z-40 bg-black/35 backdrop-blur-[2px] md:hidden animate-fade-in"
             onClick={() => setIsMobileMenuOpen(false)}
             aria-hidden="true"
           />
 
-          {/* Mobile Drawer */}
-          <div
-            ref={menuRef}
-            id="mobile-menu"
-            className="fixed top-0 right-0 bottom-0 z-50 w-full max-w-sm md:hidden flex flex-col bg-[var(--bg)] shadow-xl animate-slide-in-right"
+          {/* Floating Compact Island (Only Navbar Menu Items + Close Button) */}
+          <aside
+            ref={menuCardRef}
+            id="mobile-menu-capsule"
+            className="fixed top-[calc(var(--navbar-h)+0.375rem)] right-3 sm:right-6 z-50 w-56 md:hidden rounded-2xl bg-[var(--bg-surface)]/95 backdrop-blur-2xl border border-[var(--border)] shadow-2xl p-2 animate-menu-pop"
             role="dialog"
             aria-modal="true"
-            aria-label="Mobile navigation menu"
+            aria-label="Navigation menu"
+            onClick={(e) => e.stopPropagation()}
           >
-            {/* Header with Profile */}
-            <div className="flex flex-col items-center px-6 py-8 pb-6 border-b border-[var(--border)] relative overflow-hidden">
-              {/* Subtle background pattern */}
-              <div className="absolute inset-0 opacity-5" style={{
-                backgroundImage: `url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3e%3cpath d='M100 0L0 0 0 100' fill='none' stroke='%231a56db' stroke-width='0.5'/%3e%3c/svg%3e")`,
-                backgroundSize: "80px 80px"
-              }} />
-              
-              {/* Profile section */}
-              <div className="relative z-10 flex flex-col items-center text-center w-full">
-                <div className="relative w-24 h-24 rounded-full overflow-hidden border-3 border-[var(--accent)]/30 bg-[var(--bg-elevated)] shadow-lg">
-                  <Image
-                    src="/images/profile.jpeg"
-                    alt="Jyotirmaya Behera"
-                    width={96}
-                    height={96}
-                    priority
-                    className="w-full h-full object-cover"
-                    style={{ objectPosition: "50% 40%" }}
-                  />
-                  {/* Accent ring */}
-                  <div className="absolute inset-0 rounded-full border-2 border-[var(--accent)]/20" />
-                </div>
-                <h3 className="mt-4 text-xl font-bold text-[var(--fg)]">Jyotirmaya Behera</h3>
-                <p className="mt-1 text-sm text-[var(--fg-muted)]">Integrated MCA Student</p>
-                <p className="text-xs text-[var(--fg-subtle)]">Utkal University, Bhubaneswar</p>
-              </div>
-
-              {/* Close button */}
+            {/* Top Bar: Cross Close Button Only */}
+            <div className="flex justify-end pb-1 mb-1 border-b border-[var(--border)]/50">
               <button
-                className="absolute top-4 right-4 flex items-center justify-center w-10 h-10 rounded-full text-[var(--fg-muted)] hover:text-[var(--fg)] hover:bg-[var(--bg-elevated)] transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
-                onClick={() => setIsMobileMenuOpen(false)}
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsMobileMenuOpen(false);
+                }}
+                className="flex items-center justify-center size-7 rounded-full bg-[var(--bg-elevated)] hover:bg-[var(--accent)] hover:text-white text-[var(--fg-muted)] active:scale-90 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] cursor-pointer touch-manipulation"
                 aria-label="Close menu"
+                title="Close menu"
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <svg className="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
 
-            {/* Navigation Links */}
-            <nav className="flex-1 overflow-y-auto px-4 py-6" aria-label="Mobile menu links">
+            {/* Pure Navbar Navigation Links */}
+            <nav aria-label="Mobile navigation">
               <ul className="space-y-1" role="list">
-                {navItems.map((item, index) => {
+                {navItems.map((item) => {
                   const isActive = pathname === item.href;
-                  const delay = index * 50;
                   return (
-                    <li key={item.label} style={{ transitionDelay: `${delay}ms` }} className="animate-slide-in-right">
+                    <li key={item.label}>
                       <Link
                         href={item.href}
-                        className={`group flex items-center justify-between px-4 py-4 rounded-xl text-base font-medium transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] ${
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium transition-all duration-150 border ${
                           isActive
-                            ? "text-[var(--accent)] bg-[var(--accent-light)]/30 font-semibold"
-                            : "text-[var(--fg-muted)] hover:text-[var(--fg)] hover:bg-[var(--bg-elevated)]"
+                            ? "bg-[var(--accent-light)]/60 text-[var(--accent)] border-[var(--accent)]/40 font-semibold shadow-2xs"
+                            : "bg-[var(--bg-elevated)]/40 hover:bg-[var(--bg-elevated)] text-[var(--fg-muted)] hover:text-[var(--fg)] border-transparent"
                         }`}
                         aria-current={isActive ? "page" : undefined}
-                        onClick={() => setIsMobileMenuOpen(false)}
                       >
-                        <span className="flex items-center gap-3">
-                          <span className="text-xs font-mono text-[var(--fg-subtle)] w-8 text-right opacity-50 group-hover:opacity-100 transition-opacity">
-                            {String(index + 1).padStart(2, "0")}
-                          </span>
-                          <span>{item.label}</span>
+                        <span className={isActive ? "text-[var(--accent)]" : "text-[var(--fg-subtle)]"}>
+                          {item.icon}
                         </span>
-                        <div className="flex items-center gap-2">
-                          {isActive && (
-                            <span className="w-2 h-2 rounded-full bg-[var(--accent)] transition-transform group-hover:scale-125" aria-hidden="true" />
-                          )}
-                          <ChevronRightIcon className="group-hover:text-[var(--accent)] group-hover:translate-x-1 transition-all duration-200" />
-                        </div>
+                        <span className="truncate">{item.label}</span>
+                        {isActive && (
+                          <span className="ml-auto size-1.5 rounded-full bg-[var(--accent)]" aria-hidden="true" />
+                        )}
                       </Link>
                     </li>
                   );
                 })}
               </ul>
             </nav>
-
-            {/* Footer Section */}
-            <div className="px-4 pb-6 border-t border-[var(--border)]">
-              {/* Social Links */}
-              <div className="mb-6">
-                <p className="text-xs uppercase tracking-wider font-semibold text-[var(--fg-subtle)] mb-4 px-2">Connect</p>
-                <div className="grid grid-cols-3 gap-3">
-                  <a
-                    href={contactInfo.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex flex-col items-center gap-2 px-4 py-4 rounded-xl bg-[var(--bg-elevated)] border border-[var(--border)] hover:border-[var(--accent)]/50 hover:bg-[var(--accent-light)]/20 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
-                    aria-label="GitHub profile"
-                  >
-                    <div className="w-10 h-10 rounded-lg flex items-center justify-center text-[var(--fg-muted)] group-hover:text-[var(--accent)] transition-colors bg-[var(--bg)]">
-                      <GithubIcon />
-                    </div>
-                    <span className="text-xs font-medium text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors">GitHub</span>
-                  </a>
-                  <a
-                    href={contactInfo.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group flex flex-col items-center gap-2 px-4 py-4 rounded-xl bg-[var(--bg-elevated)] border border-[var(--border)] hover:border-[var(--accent)]/50 hover:bg-[var(--accent-light)]/20 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
-                    aria-label="LinkedIn profile"
-                  >
-                    <div className="w-10 h-10 rounded-lg flex items-center justify-center text-[var(--fg-muted)] group-hover:text-[var(--accent)] transition-colors bg-[var(--bg)]">
-                      <LinkedinIcon />
-                    </div>
-                    <span className="text-xs font-medium text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors">LinkedIn</span>
-                  </a>
-                  <a
-                    href={`mailto:${contactInfo.email}`}
-                    className="group flex flex-col items-center gap-2 px-4 py-4 rounded-xl bg-[var(--bg-elevated)] border border-[var(--border)] hover:border-[var(--accent)]/50 hover:bg-[var(--accent-light)]/20 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
-                    aria-label="Email"
-                  >
-                    <div className="w-10 h-10 rounded-lg flex items-center justify-center text-[var(--fg-muted)] group-hover:text-[var(--accent)] transition-colors bg-[var(--bg)]">
-                      <MailIcon />
-                    </div>
-                    <span className="text-xs font-medium text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors">Email</span>
-                  </a>
-                </div>
-              </div>
-
-              {/* Copyright */}
-              <p className="text-center text-xs text-[var(--fg-subtle)]">
-                &copy; {new Date().getFullYear()} Jyotirmaya Behera
-              </p>
-            </div>
-          </div>
+          </aside>
         </>
       )}
     </>

@@ -1,23 +1,20 @@
-import Image from "next/image";
+"use client";
+
 import { projects } from "@/data/projects";
 import PageHeader from "@/components/PageHeader";
 
 function GithubIcon() {
   return (
-    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        fillRule="evenodd"
-        d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-        clipRule="evenodd"
-      />
+    <svg className="size-4 shrink-0 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
     </svg>
   );
 }
 
-function LinkIcon() {
+function ExternalLinkIcon() {
   return (
-    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+    <svg className="size-3.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
     </svg>
   );
 }
@@ -26,82 +23,98 @@ export default function ProjectsContent() {
   return (
     <section
       id="projects"
-      className="pt-20 sm:pt-24 pb-12 sm:pb-20 px-4 sm:px-6 lg:px-8"
+      className="px-4 pb-16 pt-20 sm:px-6 sm:pb-24 sm:pt-24 lg:px-8"
       aria-labelledby="projects-heading"
     >
       <div className="mx-auto max-w-5xl">
         <PageHeader
           headingId="projects-heading"
           title="Projects"
-          description="Selected projects built with modern web technologies and AI/ML."
+          description="Featured engineering projects and applications."
         />
 
-        <div className="mt-2 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Premium Projects Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
           {projects.map((project) => (
             <article
               key={project.name}
-              className="group premium-card bg-[var(--bg-surface)] border border-[var(--border)] rounded-xl overflow-hidden"
+              className="group relative flex flex-col justify-between rounded-2xl border border-[var(--border)] bg-[var(--bg-surface)]/90 p-6 backdrop-blur-xl shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-[var(--accent)]/50 hover:shadow-xl"
             >
-              {project.image && (
-                <div className="relative overflow-hidden h-44 sm:h-48 bg-[var(--border)]">
-                  <Image
-                    src={project.image}
-                    alt={`${project.name} screenshot`}
-                    fill
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  {/* Gradient overlay on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--accent)]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-              )}
+              {/* Subtle ambient hover glow */}
+              <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-[var(--accent)]/5 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 
-              <div className="flex flex-col flex-1 p-5 sm:p-6">
-                <h2 className="text-lg font-semibold text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors duration-200">
+              <div className="relative z-10">
+                {/* Header Row: Status Badge */}
+                <div className="flex items-center justify-between gap-2 mb-3">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--bg-elevated)] px-2.5 py-0.5 text-[11px] font-medium text-[var(--fg-muted)] border border-[var(--border)]">
+                    <span
+                      className={`size-1.5 rounded-full ${
+                        project.status === "DEPLOYED"
+                          ? "bg-[var(--success)] animate-pulse"
+                          : "bg-[var(--accent)]"
+                      }`}
+                      aria-hidden="true"
+                    />
+                    <span>{project.status === "DEPLOYED" ? "Live" : "Completed"}</span>
+                  </span>
+
+                  <span className="text-[11px] font-mono text-[var(--fg-subtle)] uppercase">
+                    {project.technologies[0]}
+                  </span>
+                </div>
+
+                {/* Project Title & Classification */}
+                <h2 className="text-xl font-bold tracking-tight text-[var(--fg)] group-hover:text-[var(--accent)] transition-colors">
                   {project.name}
                 </h2>
-                <p className="mt-2 text-sm text-[var(--fg-muted)] leading-relaxed flex-1">
-                  {project.description}
+                <p className="mt-1 text-xs font-medium text-[var(--accent)]">
+                  {project.classification}
                 </p>
 
-                <div className="mt-4 flex flex-wrap gap-1.5">
+                {/* Description */}
+                <p className="mt-3 text-xs sm:text-sm leading-relaxed text-[var(--fg-muted)]">
+                  {project.description}
+                </p>
+              </div>
+
+              {/* Bottom: Tech Stack & Action Links */}
+              <div className="relative z-10 mt-6 pt-4 border-t border-[var(--border)]/60">
+                {/* Tech Badges */}
+                <div className="flex flex-wrap items-center gap-1.5 mb-4">
                   {project.technologies.map((tech) => (
                     <span
                       key={tech}
-                      className="px-2.5 py-1 text-xs font-medium text-[var(--fg-muted)] bg-[var(--bg-elevated)] border border-[var(--border)] rounded-md transition-all duration-200 group-hover:text-[var(--accent)] group-hover:border-[var(--accent)]/30 group-hover:bg-[var(--accent-light)]/50"
+                      className="rounded-lg bg-[var(--bg-elevated)] px-2.5 py-0.5 text-[11px] font-medium text-[var(--fg-muted)] border border-transparent group-hover:border-[var(--border)] transition-colors"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
 
-                <div className="mt-5 flex items-center gap-3 pt-4 border-t border-[var(--border)]">
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group flex items-center gap-1.5 text-sm font-medium text-[var(--accent)] hover:text-[var(--accent-hover)] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded-md px-2 py-1"
-                    >
-                      <GithubIcon />
-                      <span>Code</span>
-                    </a>
-                  )}
+                {/* Links */}
+                <div className="flex items-center gap-2.5">
                   {project.liveUrl && (
                     <a
                       href={project.liveUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group flex items-center gap-1.5 text-sm font-medium text-[var(--accent)] hover:text-[var(--accent-hover)] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] rounded-md px-2 py-1"
+                      className="inline-flex items-center gap-1.5 rounded-xl bg-[var(--accent)] px-3.5 py-1.5 text-xs font-semibold text-white shadow-xs hover:bg-[var(--accent-hover)] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
                     >
-                      <LinkIcon />
                       <span>Live Demo</span>
+                      <ExternalLinkIcon />
                     </a>
                   )}
-                  {!project.githubUrl && !project.liveUrl && (
-                    <span className="text-sm text-[var(--fg-subtle)]">
-                      Source unavailable
-                    </span>
+
+                  {project.githubUrl && (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1.5 rounded-xl bg-[var(--bg-elevated)] px-3.5 py-1.5 text-xs font-semibold text-[var(--fg)] hover:text-[var(--accent)] hover:bg-[var(--border)] transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] border border-[var(--border)]"
+                    >
+                      <GithubIcon />
+                      <span>Code</span>
+                    </a>
                   )}
                 </div>
               </div>
