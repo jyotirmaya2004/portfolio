@@ -26,10 +26,10 @@ function LinkedinIcon({ className = "" }: { className?: string }) {
   );
 }
 
-function ArrowRightIcon() {
+function ArrowRightIcon({ className = "w-3.5 h-3.5 sm:w-4 sm:h-4" }: { className?: string }) {
   return (
     <svg
-      className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1"
+      className={`${className} transition-transform duration-200 group-hover:translate-x-0.5 sm:group-hover:translate-x-1`}
       fill="none"
       stroke="currentColor"
       viewBox="0 0 24 24"
@@ -84,7 +84,7 @@ export default function Hero() {
               id="hero-heading"
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--fg)] leading-[1.15] text-balance"
             >
-              Jyotirmaya Behera — Software Developer
+              Turning problems into opportunities.
             </h1>
 
             {/* Decorative accent line */}
@@ -121,22 +121,22 @@ export default function Hero() {
               problems.
             </p>
 
-            {/* CTA buttons - Full width on mobile */}
-            <div className="mt-7 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            {/* CTA buttons - Side-by-side compact on mobile */}
+            <div className="mt-6 sm:mt-8 grid grid-cols-2 gap-2.5 max-w-xs sm:max-w-none sm:flex sm:flex-row sm:items-center sm:gap-3.5">
               <Link
                 href="/projects"
-                className="group inline-flex items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-6 py-3.5 text-sm font-medium text-white shadow-md hover:shadow-lg hover:bg-[var(--accent-hover)] transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full sm:w-auto"
+                className="group inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-lg bg-[var(--accent)] px-3.5 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-semibold sm:font-medium text-white shadow-sm hover:shadow-md hover:bg-[var(--accent-hover)] transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 whitespace-nowrap"
               >
                 View Projects
-                <ArrowRightIcon />
+                <ArrowRightIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </Link>
 
               <Link
                 href="/contact"
-                className="group inline-flex items-center justify-center gap-2 rounded-lg border border-[var(--border)] bg-[var(--bg-surface)] px-6 py-3.5 text-sm font-medium text-[var(--fg)] shadow-sm hover:border-[var(--accent)] hover:bg-[var(--bg-elevated)] hover:shadow-md hover:text-[var(--accent)] transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 w-full sm:w-auto"
+                className="group inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-lg border border-[var(--border)] bg-[var(--bg-surface)] px-3.5 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-sm font-semibold sm:font-medium text-[var(--fg)] shadow-xs hover:border-[var(--accent)] hover:bg-[var(--bg-elevated)] hover:shadow-sm hover:text-[var(--accent)] transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-offset-2 whitespace-nowrap"
               >
                 Contact Me
-                <ArrowRightIcon />
+                <ArrowRightIcon className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </Link>
             </div>
 

@@ -1,254 +1,197 @@
 "use client";
 
-import { useState } from "react";
 import type { IconType } from "react-icons";
 import {
-  FaBrain, FaCode, FaCss3Alt, FaDocker, FaEye,
-  FaGitAlt, FaGithub, FaHtml5, FaJava, FaJs,
-  FaLinux, FaNodeJs, FaPhp, FaPython, FaReact,
+  FaPython,
+  FaJava,
+  FaJs,
+  FaReact,
+  FaNodeJs,
+  FaDocker,
+  FaGitAlt,
+  FaLinux,
+  FaCode,
 } from "react-icons/fa";
 import {
-  SiC, SiCplusplus, SiExpress, SiFastapi, SiFlask,
-  SiMongodb, SiMysql, SiNextdotjs, SiPostgresql,
-  SiR, SiScikitlearn, SiSupabase, SiTailwindcss,
-  SiTensorflow, SiTypescript,
+  SiTypescript,
+  SiCplusplus,
+  SiNextdotjs,
+  SiExpress,
+  SiTailwindcss,
+  SiPostgresql,
+  SiMongodb,
 } from "react-icons/si";
-import {
-  HiOutlineCommandLine,
-  HiOutlineSquares2X2,
-  HiOutlineServerStack,
-  HiOutlineCircleStack,
-  HiOutlineCpuChip,
-  HiOutlineWrenchScrewdriver,
-} from "react-icons/hi2";
-import { skillCategories, type SkillItem } from "@/data/skills";
-import PageHeader from "@/components/PageHeader";
 
-/* ─── Tech icon & color maps ──────────────────────────────────── */
-const skillIcons: Record<string, IconType> = {
-  Python: FaPython, Java: FaJava, C: SiC, "C++": SiCplusplus, R: SiR,
-  JavaScript: FaJs, TypeScript: SiTypescript, PHP: FaPhp,
-  HTML: FaHtml5, CSS: FaCss3Alt, React: FaReact,
-  "Next.js": SiNextdotjs, "Tailwind CSS": SiTailwindcss,
-  "Node.js": FaNodeJs, Express: SiExpress, Flask: SiFlask,
-  FastAPI: SiFastapi, PostgreSQL: SiPostgresql, MySQL: SiMysql,
-  MongoDB: SiMongodb, Supabase: SiSupabase, TensorFlow: SiTensorflow,
-  "Scikit-learn": SiScikitlearn, "Machine Learning": FaBrain,
-  "Computer Vision": FaEye, Git: FaGitAlt, GitHub: FaGithub,
-  Docker: FaDocker, Linux: FaLinux,
+import { orbitalSkills, type OrbitalSkillNode } from "@/data/skills";
+
+const iconsMap: Record<string, IconType> = {
+  python: FaPython,
+  typescript: SiTypescript,
+  javascript: FaJs,
+  cplusplus: SiCplusplus,
+  java: FaJava,
+  react: FaReact,
+  nextjs: SiNextdotjs,
+  nodejs: FaNodeJs,
+  express: SiExpress,
+  tailwindcss: SiTailwindcss,
+  docker: FaDocker,
+  git: FaGitAlt,
+  linux: FaLinux,
+  postgresql: SiPostgresql,
+  mongodb: SiMongodb,
+  code: FaCode,
 };
 
 const brandColors: Record<string, string> = {
-  Python: "#3776AB", Java: "#E76F00", C: "#00599C", "C++": "#00599C",
-  R: "#276DC3", JavaScript: "#c5a800", TypeScript: "#3178C6",
-  React: "#33b8d6", "Next.js": "#888", "Tailwind CSS": "#06B6D4",
-  "Node.js": "#339933", FastAPI: "#009688", Express: "#888",
-  Flask: "#888", PostgreSQL: "#4169E1", MongoDB: "#47A248",
-  MySQL: "#4479A1", Supabase: "#3ECF8E", TensorFlow: "#FF6F00",
-  "Scikit-learn": "#F7931E", "Machine Learning": "#D4A813",
-  "Computer Vision": "#7C5CBF", Git: "#F05032", GitHub: "#888",
-  Docker: "#2496ED", Linux: "#c5a800", HTML: "#E34F26",
-  CSS: "#1572B6", PHP: "#777BB4",
+  python: "#3776AB",
+  typescript: "#3178C6",
+  javascript: "#CA8A04",
+  cplusplus: "#00599C",
+  java: "#E76F00",
+  react: "#0088CC",
+  nextjs: "var(--fg)",
+  nodejs: "#339933",
+  express: "var(--fg)",
+  tailwindcss: "#06B6D4",
+  docker: "#2496ED",
+  git: "#F05032",
+  linux: "#CA8A04",
+  postgresql: "#4169E1",
+  mongodb: "#47A248",
+  code: "var(--fg)",
 };
 
-const levelLabel: Record<1 | 2 | 3, string> = {
-  3: "Advanced",
-  2: "Proficient",
-  1: "Familiar",
-};
+const orbitRadiusMap = new Map(orbitalSkills.orbits.map((o) => [o.id, o.radius]));
 
-/* ─── Category metadata with HeroIcons ───────────────────────── */
-const categoryMeta: Record<string, { Icon: IconType; subtitle: string; accent: string }> = {
-  Languages:  { Icon: HiOutlineCommandLine,      subtitle: "Core programming languages",          accent: "#3776AB" },
-  Frontend:   { Icon: HiOutlineSquares2X2,        subtitle: "UI frameworks & styling tools",       accent: "#33b8d6" },
-  Backend:    { Icon: HiOutlineServerStack,        subtitle: "Server-side runtimes & APIs",         accent: "#339933" },
-  Databases:  { Icon: HiOutlineCircleStack,        subtitle: "Data storage & query systems",        accent: "#4169E1" },
-  "AI & ML":  { Icon: HiOutlineCpuChip,           subtitle: "ML, deep learning & vision AI",       accent: "#D4A813" },
-  DevOps:     { Icon: HiOutlineWrenchScrewdriver,  subtitle: "Dev tools, containers & infra",       accent: "#F05032" },
-};
+function getSkillNodeStyle(node: OrbitalSkillNode, orbitId: string): React.CSSProperties {
+  const radius = orbitRadiusMap.get(orbitId) ?? 0.35;
+  const angleRad = (node.angle * Math.PI) / 180;
+  const left = 50 + radius * 100 * Math.cos(angleRad);
+  const top = 50 + radius * 100 * Math.sin(angleRad);
 
-/* ─── Single skill chip ───────────────────────────────────────── */
-function SkillChip({ skill }: { skill: SkillItem }) {
-  const Icon = skillIcons[skill.name] || FaCode;
-  const color = brandColors[skill.name] || "var(--accent)";
-
-  return (
-    <div className="group flex items-center gap-3.5 rounded-2xl border border-[var(--border)] bg-[var(--bg-elevated)] px-4 py-3.5 transition-all duration-200 hover:border-[var(--border-hover)] hover:bg-[var(--bg-surface)] hover:-translate-y-px hover:shadow-sm">
-      {/* Icon */}
-      <div
-        className="flex size-10 shrink-0 items-center justify-center rounded-xl transition-transform duration-200 group-hover:scale-105"
-        style={{ color, backgroundColor: `${color}18` }}
-      >
-        <Icon className="size-5" aria-hidden />
-      </div>
-
-      {/* Text */}
-      <div className="min-w-0 flex-1">
-        <p className="text-[13px] font-semibold leading-tight tracking-tight text-[var(--fg)]">
-          {skill.name}
-        </p>
-        <p className="mt-0.5 text-[11px] font-medium tracking-wide text-[var(--fg-subtle)]">
-          {levelLabel[skill.level]}
-        </p>
-      </div>
-
-      {/* Level dots */}
-      <div className="flex items-center gap-[5px]" aria-label={levelLabel[skill.level]}>
-        {[1, 2, 3].map(d => (
-          <span
-            key={d}
-            className="size-[7px] rounded-full transition-colors"
-            style={{ backgroundColor: d <= skill.level ? color : "var(--border)" }}
-          />
-        ))}
-      </div>
-    </div>
-  );
+  return {
+    left: `${left}%`,
+    top: `${top}%`,
+    transform: "translate(-50%, -50%)",
+  };
 }
 
-/* ─── Accordion item ──────────────────────────────────────────── */
-function AccordionItem({
-  category,
-  skills,
-  isOpen,
-  onToggle,
-}: {
-  category: string;
-  skills: SkillItem[];
-  isOpen: boolean;
-  onToggle: () => void;
-}) {
-  const meta = categoryMeta[category];
-  const CatIcon = meta?.Icon ?? HiOutlineCommandLine;
-  const accent = meta?.accent ?? "var(--accent)";
-
-  return (
-    <div
-      className={`overflow-hidden rounded-2xl border transition-all duration-200 ${
-        isOpen
-          ? "border-[var(--border-hover)] bg-[var(--bg-surface)] shadow-sm"
-          : "border-[var(--border)] bg-[var(--bg-surface)]"
-      }`}
-    >
-      {/* Header */}
-      <button
-        type="button"
-        onClick={onToggle}
-        aria-expanded={isOpen}
-        className="flex w-full items-center gap-4 px-5 py-4 text-left transition-colors duration-150 hover:bg-[var(--bg-elevated)] focus:outline-none"
-      >
-        {/* Category icon */}
-        <div
-          className="flex size-11 shrink-0 items-center justify-center rounded-xl transition-transform duration-200"
-          style={{
-            backgroundColor: isOpen ? `${accent}18` : "var(--bg-elevated)",
-            color: isOpen ? accent : "var(--fg-muted)",
-          }}
-        >
-          <CatIcon className="size-5" aria-hidden />
-        </div>
-
-        {/* Title + subtitle */}
-        <div className="flex-1 min-w-0">
-          <p
-            className="text-[15px] font-bold leading-tight tracking-tight transition-colors"
-            style={{ color: isOpen ? accent : "var(--fg)" }}
-          >
-            {category}
-          </p>
-          <p className="mt-0.5 text-[12px] font-medium text-[var(--fg-subtle)]">
-            {meta?.subtitle}
-          </p>
-        </div>
-
-        {/* Count */}
-        <span
-          className="shrink-0 rounded-full px-2.5 py-0.5 text-[11px] font-bold tracking-wide transition-colors"
-          style={{
-            backgroundColor: isOpen ? `${accent}18` : "var(--bg-elevated)",
-            color: isOpen ? accent : "var(--fg-subtle)",
-          }}
-        >
-          {skills.length}
-        </span>
-
-        {/* Chevron */}
-        <svg
-          className={`size-4 shrink-0 text-[var(--fg-subtle)] transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-          aria-hidden
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-
-      {/* Animated body */}
-      <div
-        className="grid transition-[grid-template-rows] duration-300 ease-in-out"
-        style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
-      >
-        <div className="overflow-hidden">
-          <div className="border-t border-[var(--border)] p-4">
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
-              {skills.map(skill => (
-                <SkillChip key={skill.name} skill={skill} />
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* ─── Page ────────────────────────────────────────────────────── */
 export default function SkillsContent() {
-  const [openCat, setOpenCat] = useState<string>(skillCategories[0].category);
-
-  const totalSkills  = skillCategories.reduce((s, c) => s + c.skills.length, 0);
-  const advancedCount = skillCategories.reduce((s, c) => s + c.skills.filter(sk => sk.level === 3).length, 0);
+  const { centerHub, orbits } = orbitalSkills;
+  const CenterIcon = iconsMap[centerHub.icon] ?? FaCode;
 
   return (
-    <section id="skills" className="px-4 pb-24 pt-20 sm:px-6 sm:pt-24 lg:px-8" aria-labelledby="skills-heading">
-      <div className="mx-auto max-w-3xl">
-        <PageHeader
-          headingId="skills-heading"
-          title="Technical Skills"
-          description="Technologies and tools I build with."
-        />
+    <section
+      id="skills"
+      className="relative isolate flex min-h-[calc(100dvh-var(--navbar-h))] flex-col items-center justify-between overflow-hidden bg-[var(--bg)] px-4 pb-6 pt-[calc(var(--navbar-h)+1.5rem)] text-[var(--fg)] sm:px-6 sm:pb-8 sm:pt-[calc(var(--navbar-h)+2rem)]"
+      aria-label="Technical skills constellation"
+    >
+      {/* ── Background Subtle Ambient Monochrome Glow ──────────────── */}
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.035),transparent_65%)] dark:bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.04),transparent_65%)]" />
 
-        {/* Stats */}
-        <div className="mb-8 flex items-center gap-8">
-          {[
-            { value: totalSkills,           label: "Technologies" },
-            { value: skillCategories.length, label: "Domains" },
-            { value: advancedCount,          label: "Advanced" },
-          ].map(({ value, label }, i) => (
-            <div key={label} className="flex items-center gap-8">
-              <div className="text-center">
-                <p className="text-3xl font-black tracking-tight text-[var(--accent)]">{value}</p>
-                <p className="mt-0.5 text-[10px] font-bold uppercase tracking-[0.12em] text-[var(--fg-subtle)]">{label}</p>
-              </div>
-              {i < 2 && <div className="h-10 w-px bg-[var(--border)]" />}
-            </div>
-          ))}
-        </div>
-
-        {/* Accordion */}
-        <div className="space-y-2.5">
-          {skillCategories.map(cat => (
-            <AccordionItem
-              key={cat.category}
-              category={cat.category}
-              skills={cat.skills}
-              isOpen={openCat === cat.category}
-              onToggle={() => setOpenCat(p => p === cat.category ? "" : cat.category)}
+      {/* ── Orbital System Area ───────────────────────────────────────── */}
+      <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center">
+        <div
+          className="relative shrink-0 select-none"
+          style={{
+            width: "clamp(20rem, min(76vw, 76dvh), 42rem)",
+            height: "clamp(20rem, min(76vw, 76dvh), 42rem)",
+          }}
+        >
+          {/* ── Orbit Tracks (Matching Contact Page Geometry) ──────────── */}
+          {orbits.map((orbit) => (
+            <div
+              key={orbit.id}
+              className={`pointer-events-none absolute rounded-full border border-[var(--border)] ${orbit.opacityClass ?? "opacity-60 dark:opacity-40"}`}
+              style={{ inset: `${orbit.insetPercentage ?? 10}%` }}
+              aria-hidden="true"
             />
           ))}
+
+          {/* ── Center Core Hub ───────────────────────────────────────── */}
+          <div
+            className="group absolute z-30 flex size-12 sm:size-16 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--bg-surface)] text-[var(--fg)] shadow-[var(--shadow-lg)] transition-all duration-300 hover:scale-110 hover:border-[var(--fg)] focus-visible:scale-110 focus-visible:outline-none dark:border-white/15 dark:bg-[#181a1d] dark:text-white dark:hover:border-white/45 dark:shadow-[0_0_20px_rgba(255,255,255,0.08)]"
+            style={{
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
+            role="img"
+            aria-label={`${centerHub.label}: ${centerHub.tooltip}`}
+          >
+            <CenterIcon
+              className="size-5 sm:size-7 transition-transform duration-300 group-hover:scale-110"
+              aria-hidden="true"
+            />
+            {/* Tooltip */}
+            <span
+              role="tooltip"
+              className="pointer-events-none absolute bottom-[calc(100%+0.65rem)] left-1/2 z-50 -translate-x-1/2 whitespace-nowrap rounded-md border border-[var(--border)] bg-[var(--bg-surface)]/95 px-2 py-1 text-[11px] font-medium text-[var(--fg)] opacity-0 shadow-lg backdrop-blur transition-all duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 dark:border-white/15 dark:bg-[#1c1f23]/95 dark:text-white"
+            >
+              {centerHub.tooltip}
+            </span>
+          </div>
+
+          {/* ── 15 Orbiting Nodes (Vibrant Brand Colors on Logo Icons) ─── */}
+          {orbits.flatMap((orbit) =>
+            orbit.nodes.map((skill) => {
+              const Icon = iconsMap[skill.icon] ?? FaCode;
+              const iconColor = skill.color ?? brandColors[skill.icon] ?? "var(--fg)";
+              const isMonochrome = iconColor === "var(--fg)";
+
+              return (
+                <div
+                  key={`${orbit.id}-${skill.name}`}
+                  role="img"
+                  tabIndex={0}
+                  aria-label={skill.name}
+                  className="group absolute z-20 flex size-10 xs:size-11 sm:size-13 md:size-14 items-center justify-center rounded-full transition-transform duration-300 hover:scale-110 focus-visible:scale-110 focus-visible:outline-none cursor-default"
+                  style={getSkillNodeStyle(skill, orbit.id)}
+                >
+                  {/* Subtle Brand Aura Glow on Hover */}
+                  <span
+                    className="pointer-events-none absolute -inset-1.5 rounded-full opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-60 group-focus-visible:opacity-60"
+                    style={{
+                      background: isMonochrome
+                        ? "rgba(0, 0, 0, 0.15)"
+                        : `${iconColor}45`,
+                    }}
+                    aria-hidden="true"
+                  />
+
+                  {/* Node Surface (Clean Elevated Theme Background) */}
+                  <span className="relative z-10 flex size-full items-center justify-center rounded-full border border-[var(--border)] bg-[var(--bg-surface)] shadow-[var(--shadow-sm)] transition-all duration-200 group-hover:scale-110 group-hover:border-[var(--border-hover)] group-hover:bg-[var(--bg-elevated)] dark:border-white/10 dark:bg-[#191c1f] dark:group-hover:border-white/25">
+                    <Icon
+                      className="size-4 sm:size-5 transition-transform duration-300 group-hover:scale-110"
+                      style={{ color: iconColor }}
+                      aria-hidden="true"
+                    />
+                  </span>
+
+                  {/* Clean Tooltip on Hover/Focus */}
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute bottom-[calc(100%+0.65rem)] left-1/2 z-50 hidden -translate-x-1/2 whitespace-nowrap rounded-md border border-[var(--border)] bg-[var(--bg-surface)]/95 px-2 py-1 text-[11px] font-medium text-[var(--fg)] opacity-0 shadow-lg backdrop-blur transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 md:block dark:border-white/15 dark:bg-[#1c1f23]/95 dark:text-white"
+                  >
+                    {skill.name}
+                  </span>
+                </div>
+              );
+            })
+          )}
         </div>
       </div>
+
+      {/* ── Minimal Footer ───────────────────────────────────────────── */}
+      <footer className="flex flex-col items-center gap-2 text-[10px] font-medium tracking-[0.16em] text-[var(--fg-subtle)] sm:text-xs">
+        <div className="flex items-center gap-1.5" aria-hidden="true">
+          <span className="size-1 rounded-full bg-[var(--border-hover)]" />
+          <span className="size-1.5 rounded-full bg-[var(--fg-muted)]" />
+          <span className="size-1 rounded-full bg-[var(--border-hover)]" />
+        </div>
+        <p>© {new Date().getFullYear()} Jyotirmaya Behera</p>
+      </footer>
     </section>
   );
 }

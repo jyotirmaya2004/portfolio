@@ -248,15 +248,15 @@ export default function Navbar() {
             aria-label="Navigation menu"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Top Bar: Cross Close Button Only */}
-            <div className="flex justify-end pb-1 mb-1 border-b border-[var(--border)]/50">
+            {/* Top Bar: Close button */}
+            <div className="flex justify-end px-1 pt-0.5 pb-1">
               <button
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation();
                   setIsMobileMenuOpen(false);
                 }}
-                className="flex items-center justify-center size-7 rounded-full bg-[var(--bg-elevated)] hover:bg-[var(--accent)] hover:text-white text-[var(--fg-muted)] active:scale-90 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] cursor-pointer touch-manipulation"
+                className="flex items-center justify-center size-6 rounded-full text-[var(--fg-subtle)] hover:text-[var(--fg)] hover:bg-[var(--bg-elevated)] active:scale-90 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] cursor-pointer touch-manipulation"
                 aria-label="Close menu"
                 title="Close menu"
               >
@@ -266,9 +266,9 @@ export default function Navbar() {
               </button>
             </div>
 
-            {/* Pure Navbar Navigation Links */}
+            {/* Clean Mobile Navigation Links without Boxed Borders */}
             <nav aria-label="Mobile navigation">
-              <ul className="space-y-1" role="list">
+              <ul className="space-y-0.5" role="list">
                 {navItems.map((item) => {
                   const isActive = pathname === item.href;
                   return (
@@ -276,10 +276,10 @@ export default function Navbar() {
                       <Link
                         href={item.href}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className={`flex items-center gap-2.5 px-3 py-2 rounded-xl text-xs font-medium transition-all duration-150 border ${
+                        className={`flex items-center gap-2.5 px-2.5 py-2 rounded-md text-xs transition-colors duration-150 ${
                           isActive
-                            ? "bg-[var(--accent-light)]/60 text-[var(--accent)] border-[var(--accent)]/40 font-semibold shadow-2xs"
-                            : "bg-[var(--bg-elevated)]/40 hover:bg-[var(--bg-elevated)] text-[var(--fg-muted)] hover:text-[var(--fg)] border-transparent"
+                            ? "text-[var(--accent)] font-semibold"
+                            : "text-[var(--fg-muted)] hover:text-[var(--fg)] font-medium"
                         }`}
                         aria-current={isActive ? "page" : undefined}
                       >
@@ -287,9 +287,6 @@ export default function Navbar() {
                           {item.icon}
                         </span>
                         <span className="truncate">{item.label}</span>
-                        {isActive && (
-                          <span className="ml-auto size-1.5 rounded-full bg-[var(--accent)]" aria-hidden="true" />
-                        )}
                       </Link>
                     </li>
                   );

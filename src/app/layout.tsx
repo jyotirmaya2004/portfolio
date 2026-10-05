@@ -20,10 +20,6 @@ export const metadata: Metadata = {
     "Jyotirmaya Behera is a software developer and Integrated MCA student at Utkal University, building AI/ML systems and full-stack applications with Python, React, Next.js, and modern web technologies.",
   authors: [{ name: "Jyotirmaya Behera" }],
   creator: "Jyotirmaya Behera",
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-  },
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -87,7 +83,7 @@ export default function RootLayout({
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(s==='dark'||(!s&&d)){document.documentElement.classList.add('dark');document.documentElement.setAttribute('data-theme','dark');}else{document.documentElement.classList.remove('dark');document.documentElement.setAttribute('data-theme','light');}}catch(e){}})();`,
+            __html: `(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(s==='dark'||(!s&&d)){document.documentElement.classList.add('dark');document.documentElement.setAttribute('data-theme','dark');}else{document.documentElement.classList.remove('dark');document.documentElement.setAttribute('data-theme','light');}}catch(e){})();`,
           }}
         />
         <script
@@ -96,8 +92,10 @@ export default function RootLayout({
             __html: websiteJsonLd
           }}
         />
-        {/* Favicon - automatically served from public/favicon.ico */}
+        {/* Favicon links using favicon_io folder assets */}
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/site.webmanifest" />
       </head>
       <body className="min-h-full flex flex-col bg-[var(--bg)] text-[var(--fg)]">
         <Navbar />

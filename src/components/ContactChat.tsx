@@ -1,19 +1,13 @@
 "use client";
 
 import { useState, useRef, useEffect, FormEvent } from "react";
-
-const QUICK_TOPICS = [
-  "Project",
-  "Internship",
-  "Collaboration",
-  "Just saying hi",
-];
+import { usePathname } from "next/navigation";
 
 export default function ContactChat() {
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [topic, setTopic] = useState<string | null>(null);
   const [message, setMessage] = useState("");
   const [honeypot, setHoneypot] = useState("");
 
@@ -40,11 +34,61 @@ export default function ContactChat() {
     }, 50);
   };
 
+  // Automatically close dialog when user navigates to another page
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
+    setIsOpen(false);
+  }
+
+  // Close dialog on browser back / forward navigation (popstate)
+  useEffect(() => {
+    const handlePopState = () => {
+      setIsOpen(false);
+    };
+    window.addEventListener("popstate", handlePopState);
+    return () => window.removeEventListener("popstate", handlePopState);
+  }, []);
+
+  // Close when tapping or clicking on the backpage / outside the panel
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+      const target = e.target as Node;
+      if (
+        panelRef.current &&
+        !panelRef.current.contains(target) &&
+        triggerButtonRef.current &&
+        !triggerButtonRef.current.contains(target)
+      ) {
+        handleClose();
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+    };
+  }, [isOpen]);
+
+  // Listen to open-contact-chat custom event
+  useEffect(() => {
+    const handleOpenEvent = () => {
+      setIsOpen(true);
+    };
+    window.addEventListener("open-contact-chat", handleOpenEvent);
+    return () => {
+      window.removeEventListener("open-contact-chat", handleOpenEvent);
+    };
+  }, []);
+
   // Lock body scroll on mobile when chat panel is open
   useEffect(() => {
     if (isOpen) {
       const originalOverflow = document.body.style.overflow;
-      // Only lock on mobile viewports to allow desktop background interaction
+      // Only lock on mobile viewports to allow smooth touch experience
       if (window.innerWidth < 640) {
         document.body.style.overflow = "hidden";
       }
@@ -79,27 +123,6 @@ export default function ContactChat() {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isOpen]);
-
-  // Handle quick topic selection
-  const handleTopicClick = (selected: string) => {
-    if (topic === selected) {
-      setTopic(null);
-    } else {
-      setTopic(selected);
-      // If message is empty, provide a clean gentle starting prompt
-      if (!message.trim()) {
-        if (selected === "Project") {
-          setMessage("Hi Jyotirmaya, I'd like to discuss a project regarding...");
-        } else if (selected === "Internship") {
-          setMessage("Hi Jyotirmaya, I have an internship opportunity regarding...");
-        } else if (selected === "Collaboration") {
-          setMessage("Hi Jyotirmaya, I would love to collaborate with you on...");
-        } else if (selected === "Just saying hi") {
-          setMessage("Hi Jyotirmaya, just wanted to say hello!");
-        }
-      }
-    }
-  };
 
   // Handle form submission
   const handleSubmit = async (e: FormEvent) => {
@@ -153,7 +176,6 @@ export default function ContactChat() {
         body: JSON.stringify({
           name: trimmedName,
           email: trimmedEmail,
-          topic: topic || undefined,
           message: trimmedMessage,
           honeypot: honeypot || undefined,
         }),
@@ -166,7 +188,6 @@ export default function ContactChat() {
         // Reset form data on success
         setName("");
         setEmail("");
-        setTopic(null);
         setMessage("");
       } else {
         setErrorMessage(
@@ -188,10 +209,10 @@ export default function ContactChat() {
 
   return (
     <>
-      {/* Mobile Backdrop Overlay (tapping outside closes sheet on mobile) */}
+      {/* Backdrop Overlay (tapping outside / background closes dialog on both mobile and desktop) */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/40 z-40 sm:hidden transition-opacity"
+          className="fixed inset-0 bg-black/40 sm:bg-black/25 z-40 transition-opacity"
           aria-hidden="true"
           onClick={handleClose}
         />
@@ -232,7 +253,7 @@ export default function ContactChat() {
         <span>Let&apos;s Talk</span>
       </button>
 
-      {/* Chat Contact Panel: Mobile Bottom Sheet / Desktop Floating Window */}
+      {/* Contact Panel: Mobile Bottom Sheet / Desktop Floating Window */}
       {isOpen && (
         <div
           id="contact-chat-panel"
@@ -240,7 +261,7 @@ export default function ContactChat() {
           role="dialog"
           aria-modal="true"
           aria-labelledby="chat-panel-title"
-          className="fixed z-50 bg-[var(--bg-surface)] border-t sm:border border-[var(--border)] shadow-2xl rounded-t-2xl sm:rounded-2xl flex flex-col overflow-hidden animate-slide-down inset-x-0 bottom-0 max-h-[92dvh] sm:inset-x-auto sm:right-5 sm:bottom-20 sm:w-[380px] sm:max-h-[620px]"
+          className="fixed z-50 bg-[var(--bg-surface)] border-t sm:border border-[var(--border)] shadow-2xl rounded-t-2xl sm:rounded-2xl flex flex-col overflow-hidden animate-slide-down inset-x-0 bottom-0 max-h-[92dvh] sm:inset-x-auto sm:right-5 sm:bottom-20 sm:w-[380px] sm:max-h-[580px]"
         >
           {/* Mobile Sheet Drag Indicator Bar */}
           <div
@@ -249,18 +270,13 @@ export default function ContactChat() {
           />
 
           {/* Header */}
-          <div className="flex items-start justify-between px-4 py-3 sm:p-5 border-b border-[var(--border)] bg-[var(--bg)] shrink-0">
-            <div>
-              <h2
-                id="chat-panel-title"
-                className="text-sm sm:text-base font-semibold text-[var(--fg)] tracking-tight"
-              >
-                Let&apos;s talk
-              </h2>
-              <p className="text-xs text-[var(--fg-muted)] mt-0.5">
-                Leave a message and I&apos;ll reply by email.
-              </p>
-            </div>
+          <div className="flex items-center justify-between px-4 py-3 sm:px-5 sm:py-4 border-b border-[var(--border)] bg-[var(--bg)] shrink-0">
+            <h2
+              id="chat-panel-title"
+              className="text-sm sm:text-base font-semibold text-[var(--fg)] tracking-tight"
+            >
+              Let&apos;s Talk
+            </h2>
             <button
               ref={closeButtonRef}
               onClick={handleClose}
@@ -284,8 +300,8 @@ export default function ContactChat() {
             </button>
           </div>
 
-          {/* Panel Content (Scrollable with overscroll containment for touch) */}
-          <div className="flex-1 overflow-y-auto overscroll-contain p-4 sm:p-5 space-y-4">
+          {/* Panel Content */}
+          <div className="flex-1 overflow-y-auto overscroll-contain p-4 sm:p-5">
             {isSuccess ? (
               /* Success State */
               <div
@@ -314,7 +330,7 @@ export default function ContactChat() {
                     Message sent successfully
                   </h3>
                   <p className="text-sm text-[var(--fg-muted)] max-w-xs mx-auto">
-                    Thanks for reaching out. I&apos;ll get back to you by email.
+                    Thanks for reaching out. I&apos;ll get back to you soon.
                   </p>
                 </div>
                 <div className="pt-3">
@@ -329,40 +345,7 @@ export default function ContactChat() {
               </div>
             ) : (
               /* Form State */
-              <>
-                {/* Initial Greeting Bubble */}
-                <div className="bg-[var(--bg)] border border-[var(--border)] rounded-xl p-3 sm:p-3.5 text-xs sm:text-sm text-[var(--fg-muted)] leading-relaxed">
-                  Hi! Want to talk about a project, opportunity, collaboration,
-                  or just say hello?
-                </div>
-
-                {/* Quick Topic Chips */}
-                <div>
-                  <p className="text-xs text-[var(--fg-subtle)] mb-2 font-medium">
-                    Topic (optional)
-                  </p>
-                  <div className="flex flex-wrap gap-1.5" role="group" aria-label="Topic options">
-                    {QUICK_TOPICS.map((item) => {
-                      const isSelected = topic === item;
-                      return (
-                        <button
-                          key={item}
-                          type="button"
-                          onClick={() => handleTopicClick(item)}
-                          className={`px-2.5 py-1.5 sm:py-1 text-xs font-medium rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] ${
-                            isSelected
-                              ? "bg-[var(--accent)] text-white border border-[var(--accent)]"
-                              : "bg-[var(--bg)] text-[var(--fg-muted)] border border-[var(--border)] hover:border-[var(--border-hover)] hover:text-[var(--fg)]"
-                          }`}
-                          aria-pressed={isSelected}
-                        >
-                          {item}
-                        </button>
-                      );
-                    })}
-                  </div>
-                </div>
-
+              <div className="space-y-4">
                 {/* Error Banner */}
                 {errorMessage && (
                   <div
@@ -374,7 +357,7 @@ export default function ContactChat() {
                 )}
 
                 {/* Form */}
-                <form onSubmit={handleSubmit} className="space-y-3.5" noValidate>
+                <form onSubmit={handleSubmit} className="space-y-4" noValidate>
                   {/* Honeypot field (hidden from users and screen readers) */}
                   <div className="sr-only" aria-hidden="true">
                     <label htmlFor="website_hp">Leave this field blank</label>
@@ -389,11 +372,11 @@ export default function ContactChat() {
                     />
                   </div>
 
-                  {/* Name Input - text-base on mobile prevents iOS Safari auto-zoom */}
+                  {/* Name Input */}
                   <div>
                     <label
                       htmlFor="chat-name"
-                      className="block text-xs font-medium text-[var(--fg)] mb-1"
+                      className="block text-xs font-medium text-[var(--fg)] mb-1.5"
                     >
                       Name <span className="text-red-500">*</span>
                     </label>
@@ -410,11 +393,11 @@ export default function ContactChat() {
                     />
                   </div>
 
-                  {/* Email Input - text-base on mobile prevents iOS Safari auto-zoom */}
+                  {/* Email Input */}
                   <div>
                     <label
                       htmlFor="chat-email"
-                      className="block text-xs font-medium text-[var(--fg)] mb-1"
+                      className="block text-xs font-medium text-[var(--fg)] mb-1.5"
                     >
                       Email <span className="text-red-500">*</span>
                     </label>
@@ -430,46 +413,38 @@ export default function ContactChat() {
                     />
                   </div>
 
-                  {/* Message Input - text-base on mobile prevents iOS Safari auto-zoom */}
+                  {/* Message Input */}
                   <div>
                     <label
                       htmlFor="chat-message"
-                      className="block text-xs font-medium text-[var(--fg)] mb-1"
+                      className="block text-xs font-medium text-[var(--fg)] mb-1.5"
                     >
                       Message <span className="text-red-500">*</span>
                     </label>
                     <textarea
                       id="chat-message"
                       required
-                      rows={3}
+                      rows={4}
                       maxLength={2000}
                       value={message}
                       onChange={(e) => setMessage(e.target.value)}
                       placeholder="Write your message..."
                       className="w-full px-3 py-2.5 sm:py-2 text-base sm:text-sm bg-[var(--bg-surface)] border border-[var(--border)] rounded-md text-[var(--fg)] placeholder:text-[var(--fg-subtle)] focus:outline-none focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)] transition-colors resize-none"
                     />
-                    <div className="flex justify-between items-center mt-1">
-                      <span className="text-[11px] text-[var(--fg-subtle)]">
-                        Min. 10 characters
-                      </span>
-                      <span className="text-[11px] text-[var(--fg-subtle)]">
-                        {message.length}/2000
-                      </span>
-                    </div>
                   </div>
 
                   {/* Submit Button */}
-                  <div className="pt-1 pb-2 sm:pb-0">
+                  <div className="pt-1">
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full inline-flex items-center justify-center px-4 py-3 sm:py-2.5 text-base sm:text-sm font-medium text-white bg-[var(--accent)] rounded-md hover:bg-[var(--accent-hover)] transition-colors disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--accent)]"
+                      className="w-full inline-flex items-center justify-center px-4 py-2.5 text-base sm:text-sm font-medium text-white bg-[var(--accent)] rounded-md hover:bg-[var(--accent-hover)] transition-colors disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--accent)] shadow-sm"
                     >
-                      {isSubmitting ? "Sending..." : "Send message"}
+                      {isSubmitting ? "Sending..." : "Send Message"}
                     </button>
                   </div>
                 </form>
-              </>
+              </div>
             )}
           </div>
         </div>
