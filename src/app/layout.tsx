@@ -11,43 +11,41 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Jyotirmaya Behera | Integrated MCA Student & Software Developer",
+  metadataBase: new URL("https://www.jyotirmayabehera.com"),
+  title: {
+    default: "Jyotirmaya Behera | Software Developer",
+    template: "%s | Jyotirmaya Behera",
+  },
   description:
-    "Portfolio of Jyotirmaya Behera - Integrated MCA student at Utkal University, Bhubaneswar. Software developer with interests in AI/ML, full-stack web development, and modern technologies.",
-  keywords: [
-    "Jyotirmaya Behera",
-    "Software Developer",
-    "Integrated MCA",
-    "Utkal University",
-    "Bhubaneswar",
-    "AI/ML",
-    "Full Stack Developer",
-    "Portfolio",
-  ],
-  authors: [{ name: "Jyotirmaya Behera" }],
+    "Jyotirmaya Behera is a software developer and Integrated MCA student at Utkal University, building AI/ML systems and full-stack applications with Python, React, Next.js, and modern web technologies.",
+  authors: [{ name: "Jyotirmaya Behera", url: "https://www.jyotirmayabehera.com" }],
   creator: "Jyotirmaya Behera",
-  publisher: "Jyotirmaya Behera",
-  robots: "index, follow",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://jyotirmaya.dev",
-    title: "Jyotirmaya Behera | Software Developer Portfolio",
+    url: "https://www.jyotirmayabehera.com",
+    title: "Jyotirmaya Behera | Software Developer",
     description:
-      "Portfolio of Jyotirmaya Behera - Integrated MCA student and software developer showcasing projects in AI/ML, web development, and more.",
-    siteName: "Jyotirmaya Behera Portfolio",
+      "Jyotirmaya Behera is a software developer and Integrated MCA student at Utkal University, building AI/ML systems and full-stack applications with Python, React, Next.js, and modern web technologies.",
+    siteName: "Jyotirmaya Behera",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Jyotirmaya Behera — Software Developer",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jyotirmaya Behera | Software Developer Portfolio",
+    title: "Jyotirmaya Behera | Software Developer",
     description:
-      "Portfolio of Jyotirmaya Behera - Integrated MCA student and software developer.",
-    creator: "@jyotirmaya_dev",
+      "Jyotirmaya Behera is a software developer and Integrated MCA student at Utkal University, building AI/ML systems and full-stack applications.",
+    images: ["/og-image.jpg"],
   },
-  icons: {
-    icon: "/images/profile.jpeg",
-    shortcut: "/images/profile.jpeg",
-    apple: "/images/profile.jpeg",
+  alternates: {
+    canonical: "https://www.jyotirmayabehera.com",
   },
 };
 
@@ -71,17 +69,9 @@ export default function RootLayout({
       className={`${inter.variable} h-full antialiased`}
     >
       <head>
-        <link rel="icon" href="/images/profile.jpeg" type="image/jpeg" />
-        <link rel="apple-touch-icon" href="/images/profile.jpeg" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(s==='dark'||(!s&&d)){document.documentElement.classList.add('dark');document.documentElement.setAttribute('data-theme','dark');}else{document.documentElement.classList.remove('dark');document.documentElement.setAttribute('data-theme','light');}}catch(e){}document.addEventListener('copy',function(e){var t=e.target;if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable))return;e.preventDefault();});document.addEventListener('cut',function(e){var t=e.target;if(t&&(t.tagName==='INPUT'||t.tagName==='TEXTAREA'||t.isContentEditable))return;e.preventDefault();});})();`,
+            __html: `(function(){try{var s=localStorage.getItem('theme');var d=window.matchMedia('(prefers-color-scheme: dark)').matches;if(s==='dark'||(!s&&d)){document.documentElement.classList.add('dark');document.documentElement.setAttribute('data-theme','dark');}else{document.documentElement.classList.remove('dark');document.documentElement.setAttribute('data-theme','light');}}catch(e){}})();`,
           }}
         />
       </head>

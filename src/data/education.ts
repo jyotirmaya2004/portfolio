@@ -15,7 +15,7 @@ export const education: EducationItem[] = [
     period: "2024 – 2029",
     description:
       "Five-year integrated program combining computer science fundamentals with advanced applications. Focus on software development, algorithms, database systems, and AI/ML.",
-    cgpa: "8.2/10 (Current)",
+    cgpa: "9.32/10 (Current)",
   },
   {
     degree: "Higher Secondary (Class 12)",

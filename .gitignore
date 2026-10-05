@@ -1,25 +1,25 @@
-# Dependencies and build output
-/node_modules
-/.next
-/out
-/build
+# Dependencies
+node_modules
 
-# Package-manager and debug files
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
-*.log
+# Next.js /.next
+.next
 
-# Local configuration and deployment files
+# Environment variables
 .env*
-!.env.example
-.vercel
+*.env.local
+*.env.development.local
+*.env.test.local
+*.env.production.local
 
-# OS and TypeScript files
+# Build artifacts
+.pnpm-lock.yaml
+package-lock.json
+
+# OS generated files
 .DS_Store
-*.pem
-*.tsbuildinfo
-next-env.d.ts
+
+# Local dev only
+*.local
+
+# Meta files (local metadata, not for version control)
+*.meta

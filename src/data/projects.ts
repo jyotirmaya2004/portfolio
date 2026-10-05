@@ -1,54 +1,51 @@
 export interface Project {
   name: string;
-  classification: string;
   description: string;
   technologies: string[];
-  status: "DEPLOYED" | "COMPLETED" | "ACTIVE";
   githubUrl?: string;
   liveUrl?: string;
   image?: string;
+  status?: "DEPLOYED" | "COMPLETED";
+  classification?: string;
 }
 
 export const projects: Project[] = [
   {
     name: "Netram",
-    classification: "Smart Inspection & AI Monitoring Platform",
     description:
-      "Comprehensive monitoring platform featuring real-time CCTV feeds, surprise inspection routing, WebRTC video conferencing, and automated computer vision analytics.",
+      "A monitoring and inspection platform based on the SIH problem statement. Features real-time monitoring, CCTV integration, surprise inspections, video conferencing, inspection management, and AI-based analytics for DoSJE-related requirements.",
     technologies: ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "WebRTC"],
-    status: "DEPLOYED",
     githubUrl: "https://github.com/jyotirmaya2004/netram",
-    liveUrl: "https://netram.example.com",
-    image: "/images/projects/netram.png",
+    liveUrl: "https://netram.vercel.app",
+    status: "DEPLOYED",
+    classification: "AI · Monitoring Platform",
   },
   {
     name: "Plantexa",
-    classification: "Two-Stage AI Disease Diagnosis Engine",
     description:
-      "Agricultural diagnostic system utilizing a dual-stage neural pipeline: rapid leaf verification followed by multi-class pathogen classification using CNNs.",
-    technologies: ["Python", "TensorFlow", "Computer Vision", "CNN", "OpenCV"],
-    status: "COMPLETED",
+      "AI-based plant leaf disease detection system using a two-stage approach. First stage verifies whether the input is a leaf, second stage classifies the disease. Built during NIELIT internship.",
+    technologies: ["Python", "TensorFlow", "Computer Vision", "Machine Learning"],
     githubUrl: "https://github.com/jyotirmaya2004/plantexa",
-    image: "/images/projects/plantexa.png",
+    status: "COMPLETED",
+    classification: "AI/ML · Computer Vision",
   },
   {
     name: "Prodexa",
-    classification: "Product Data Pipeline & Curation Engine",
     description:
-      "Product intelligence aggregator implementing distributed data extraction routines, structured relational warehousing, and fast multi-attribute filtering.",
-    technologies: ["Flask", "Python", "PostgreSQL", "Supabase", "Scraping"],
-    status: "COMPLETED",
+      "Product Data Aggregator & Curator built with Flask, PostgreSQL, and Supabase. Features web scraping, product curation, search and filtering, and authentication.",
+    technologies: ["Flask", "Python", "PostgreSQL", "Supabase", "Web Scraping"],
     githubUrl: "https://github.com/jyotirmaya2004/prodexa",
-    image: "/images/projects/prodexa.png",
+    status: "COMPLETED",
+    classification: "Full Stack · Data Engineering",
   },
   {
     name: "Aptixa",
-    classification: "Quantitative Aptitude & Assessment Platform",
     description:
-      "Placement readiness assessment platform featuring interactive quiz modes, real-time score analytics, detailed answer breakdowns, and custom practice sets.",
-    technologies: ["React", "Node.js", "Express", "MongoDB", "REST APIs"],
-    status: "COMPLETED",
+      "Placement Preparation & Quiz Platform focused on quantitative aptitude and learning-oriented quiz functionality.",
+    technologies: ["React", "Node.js", "Express", "MongoDB"],
     githubUrl: "https://github.com/jyotirmaya2004/aptixa",
-    image: "/images/projects/aptixa.png",
+    liveUrl: "https://aptixa.jyotirmayabehera.com",
+    status: "DEPLOYED",
+    classification: "Full Stack · EdTech",
   },
 ];
