@@ -19,7 +19,7 @@ import {
 import { SiThreads, SiSubstack } from "react-icons/si";
 import { FaXTwitter } from "react-icons/fa6";
 
-import { socialLinks } from "@/data/contact";
+import { coreSocialLinks, optionalSocialLinks } from "@/data/socialLinks";
 
 function getIcon(icon: string) {
   switch (icon) {
@@ -65,8 +65,8 @@ function getIcon(icon: string) {
     case "substack":
       return <SiSubstack />;
 
-    case "email":
-      return <FaEnvelope />;
+    case "globe":
+      return <Globe />;
 
     default:
       return null;
@@ -226,7 +226,7 @@ export default function ContactContent() {
               SOCIAL ICONS
           ======================================== */}
 
-          {socialLinks.map((social) => (
+          {coreSocialLinks.map((social) => (
             <a
               key={social.label}
               href={social.href}
@@ -298,7 +298,7 @@ export default function ContactContent() {
                   color: social.color,
                 }}
               >
-                {getIcon(social.icon)}
+                {getIcon(social.icon as string)}
               </span>
 
               {/* Brand glow */}
@@ -403,176 +403,49 @@ export default function ContactContent() {
           RESPONSIVE POSITIONING
       ======================================== */}
 
-      <style jsx>{`
-        /*
+      {/* <style jsx>{`
+        *
          * OUTER RING
          *
          * These positions intentionally mimic
          * the radial arrangement from your
          * reference screenshot.
-         */
+         * */}
 
-        .social-facebook {
-          top: 8%;
-          left: 32%;
-        }
-
-        .social-telegram {
-          top: 8%;
-          right: 28%;
-        }
-
-        .social-threads {
-          top: 18%;
-          right: 10%;
-        }
-
-        .social-github {
-          top: 25%;
-          left: 50%;
-          transform: translateX(-50%);
-        }
-
-        .social-linkedin {
-          top: 31%;
-          right: 17%;
-        }
-
-        .social-youtube {
-          top: 31%;
-          left: 28%;
-        }
-
-        .social-quora {
-          top: 25%;
-          left: 10%;
-        }
-
-        .social-snapchat {
-          top: 42%;
-          left: 8%;
-        }
-
-        .social-instagram {
-          bottom: 31%;
-          left: 28%;
-        }
-
-        .social-x {
-          bottom: 31%;
-          right: 25%;
-        }
-
-        .social-reddit {
-          bottom: 40%;
-          right: 8%;
-        }
-
-        .social-pinterest {
-          bottom: 20%;
-          right: 29%;
-        }
-
-        .social-medium {
-          bottom: 11%;
-          left: 50%;
-          transform: translateX(-50%);
-        }
-
-        .social-substack {
-          bottom: 20%;
-          left: 22%;
-        }
-
-        .social-email {
-          bottom: 38%;
-          left: 8%;
-        }
-
-        /*
-         * MOBILE
-         *
-         * Keep everything inside the smaller
-         * orbital system.
-         */
+        {/* .social-facebook { top: 8%; left: 32%; } }
+        .social-telegram { top: 8%; right: 28%; }
+        .social-threads { top: 18%; right: 10%; }
+        .social-github { top: 25%; left: 50%; transform: translateX(-50%); }
+        .social-linkedin { top: 31%; right: 17%; }
+        .social-youtube { top: 31%; left: 28%; }
+        .social-quora { top: 25%; left: 10%; }
+        .social-snapchat { top: 42%; left: 8%; }
+        .social-instagram { bottom: 31%; left: 28%; }
+        .social-x { bottom: 31%; right: 25%; }
+        .social-reddit { bottom: 40%; right: 8%; }
+        .social-pinterest { bottom: 20%; right: 29%; }
+        .social-medium { bottom: 11%; left: 50%; transform: translateX(-50%); }
+        .social-substack { bottom: 20%; left: 22%; }
+        .social-email { bottom: 38%; left: 8%; }
 
         @media (max-width: 640px) {
-          .social-facebook {
-            top: 7%;
-            left: 25%;
-          }
-
-          .social-telegram {
-            top: 7%;
-            right: 25%;
-          }
-
-          .social-threads {
-            top: 18%;
-            right: 5%;
-          }
-
-          .social-github {
-            top: 25%;
-            left: 50%;
-          }
-
-          .social-linkedin {
-            top: 32%;
-            right: 8%;
-          }
-
-          .social-youtube {
-            top: 32%;
-            left: 20%;
-          }
-
-          .social-quora {
-            top: 25%;
-            left: 5%;
-          }
-
-          .social-snapchat {
-            top: 44%;
-            left: 2%;
-          }
-
-          .social-instagram {
-            bottom: 30%;
-            left: 19%;
-          }
-
-          .social-x {
-            bottom: 30%;
-            right: 18%;
-          }
-
-          .social-reddit {
-            bottom: 42%;
-            right: 2%;
-          }
-
-          .social-pinterest {
-            bottom: 19%;
-            right: 23%;
-          }
-
-          .social-medium {
-            bottom: 9%;
-            left: 50%;
-          }
-
-          .social-substack {
-            bottom: 19%;
-            left: 13%;
-          }
-
-          .social-email {
-            bottom: 39%;
-            left: 2%;
-          }
+          .social-facebook { top: 7%; left: 25%; }
+          .social-telegram { top: 7%; right: 25%; }
+          .social-threads { top: 18%; right: 5%; }
+          .social-github { top: 25%; left: 50%; }
+          .social-linkedin { top: 32%; right: 8%; }
+          .social-youtube { top: 32%; left: 20%; }
+          .social-quora { top: 25%; left: 5%; }
+          .social-snapchat { top: 44%; left: 2%; }
+          .social-instagram { bottom: 30%; left: 19%; }
+          .social-x { bottom: 30%; right: 18%; }
+          .social-reddit { bottom: 42%; right: 2%; }
+          .social-pinterest { bottom: 19%; right: 23%; }
+          .social-medium { bottom: 9%; left: 50%; }
+          .social-substack { bottom: 19%; left: 13%; }
+          .social-email { bottom: 39%; left: 2%; }
         }
-      `}</style>
+      `</style> */}
     </main>
   );
 }
