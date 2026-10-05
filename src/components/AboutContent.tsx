@@ -13,7 +13,7 @@ export default function AboutContent() {
     <section id="about" className="relative overflow-hidden px-4 pb-12 pt-20 sm:px-6 sm:pb-20 sm:pt-24 lg:px-8" aria-labelledby="about-heading">
       <div className="pointer-events-none absolute -right-32 top-20 size-80 rounded-full bg-[var(--accent-glow)] blur-3xl" />
       <div className="relative mx-auto max-w-5xl">
-        <PageHeader headingId="about-heading" title="About" description="Software developer and student exploring the intersection of web technologies and AI/ML." />
+        <PageHeader headingId="about-heading" title="About Jyotirmaya Behera" description="Software developer and student exploring the intersection of web technologies and AI/ML." />
 
         <div className="grid gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(17rem,0.65fr)] lg:items-start">
           <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-surface)] p-5 shadow-[var(--shadow-sm)] sm:p-7">

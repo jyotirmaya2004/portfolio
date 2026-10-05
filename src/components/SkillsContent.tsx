@@ -215,7 +215,7 @@ export default function SkillsContent() {
       <div className="mx-auto max-w-3xl">
         <PageHeader
           headingId="skills-heading"
-          title="Skills"
+          title="Technical Skills"
           description="Technologies and tools I build with."
         />
 

@@ -84,9 +84,7 @@ export default function Hero() {
               id="hero-heading"
               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-[var(--fg)] leading-[1.15] text-balance"
             >
-              Turning problems into
-              <br />
-              <span className="gradient-text">opportunities.</span>
+              Jyotirmaya Behera — Software Developer
             </h1>
 
             {/* Decorative accent line */}

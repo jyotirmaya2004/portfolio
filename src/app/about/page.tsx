@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   description:
     "Learn about Jyotirmaya Behera — a software developer and Integrated MCA student at Utkal University, Bhubaneswar, building AI/ML systems and full-stack applications.",
   alternates: {
-    canonical: "https://www.jyotirmayabehera.com/about",
+    canonical: "https://jyotirmayabehera.com/about",
   },
   openGraph: {
     title: "About Jyotirmaya Behera | Software Developer",
     description:
       "Learn about Jyotirmaya Behera — a software developer and Integrated MCA student at Utkal University, Bhubaneswar, building AI/ML systems and full-stack applications.",
-    url: "https://www.jyotirmayabehera.com/about",
+    url: "https://jyotirmayabehera.com/about",
   },
 };
 
@@ -22,8 +22,8 @@ const profileJsonLd = {
   mainEntity: {
     "@type": "Person",
     name: "Jyotirmaya Behera",
-    url: "https://www.jyotirmayabehera.com",
-    image: "https://www.jyotirmayabehera.com/images/profile.jpeg",
+    url: "https://jyotirmayabehera.com",
+    image: "https://jyotirmayabehera.com/images/profile.jpeg",
     jobTitle: "Software Developer",
     description:
       "Software developer and Integrated MCA student at Utkal University, Bhubaneswar, building AI/ML systems and full-stack web applications.",

@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   description:
     "Get in touch with Jyotirmaya Behera. Open to internship opportunities, project collaborations, and general discussions about software development and AI/ML.",
   alternates: {
-    canonical: "https://www.jyotirmayabehera.com/contact",
+    canonical: "https://jyotirmayabehera.com/contact",
   },
   openGraph: {
     title: "Contact | Jyotirmaya Behera",
     description:
       "Get in touch with Jyotirmaya Behera. Open to internship opportunities, project collaborations, and general discussions about software development and AI/ML.",
-    url: "https://www.jyotirmayabehera.com/contact",
+    url: "https://jyotirmayabehera.com/contact",
   },
 };
 

@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   description:
     "Educational background of Jyotirmaya Behera — pursuing an Integrated MCA at Utkal University, Bhubaneswar with a current CGPA of 9.32/10, combining computer science fundamentals with software development and AI/ML.",
   alternates: {
-    canonical: "https://www.jyotirmayabehera.com/education",
+    canonical: "https://jyotirmayabehera.com/education",
   },
   openGraph: {
     title: "Education | Jyotirmaya Behera",
     description:
       "Educational background of Jyotirmaya Behera — pursuing an Integrated MCA at Utkal University, Bhubaneswar with a current CGPA of 9.32/10, combining computer science fundamentals with software development and AI/ML.",
-    url: "https://www.jyotirmayabehera.com/education",
+    url: "https://jyotirmayabehera.com/education",
   },
 };
 

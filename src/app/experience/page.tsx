@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   description:
     "Work experience and internships of Jyotirmaya Behera — including a machine learning internship at NIELIT Bhubaneswar where he built an AI-based plant disease detection system using TensorFlow and computer vision.",
   alternates: {
-    canonical: "https://www.jyotirmayabehera.com/experience",
+    canonical: "https://jyotirmayabehera.com/experience",
   },
   openGraph: {
     title: "Experience | Jyotirmaya Behera",
     description:
       "Work experience and internships of Jyotirmaya Behera — including a machine learning internship at NIELIT Bhubaneswar where he built an AI-based plant disease detection system using TensorFlow and computer vision.",
-    url: "https://www.jyotirmayabehera.com/experience",
+    url: "https://jyotirmayabehera.com/experience",
   },
 };
 

@@ -57,7 +57,7 @@ export const coreSocialLinks: SocialLink[] = [
 export const optionalSocialLinks: SocialLink[] = [
   {
     label: "Website",
-    href: "www.jyotirmayabehera.com",
+    href: "https://jyotirmayabehera.com",
     icon: "globe",
     color: "var(--fg)",
     ringColor: "var(--accent-glow)",

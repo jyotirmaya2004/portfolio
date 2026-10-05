@@ -8,6 +8,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://www.jyotirmayabehera.com/sitemap.xml",
+    sitemap: "https://jyotirmayabehera.com/sitemap.xml",
   };
 }

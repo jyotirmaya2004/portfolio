@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   description:
     "Technical skills of Jyotirmaya Behera — spanning full-stack web development with Next.js, React, TypeScript, and Node.js; backend systems with Python, Flask, and PostgreSQL; and AI/ML with TensorFlow and computer vision.",
   alternates: {
-    canonical: "https://www.jyotirmayabehera.com/skills",
+    canonical: "https://jyotirmayabehera.com/skills",
   },
   openGraph: {
     title: "Skills | Jyotirmaya Behera",
     description:
       "Technical skills of Jyotirmaya Behera — spanning full-stack web development with Next.js, React, TypeScript, and Node.js; backend systems with Python, Flask, and PostgreSQL; and AI/ML with TensorFlow and computer vision.",
-    url: "https://www.jyotirmayabehera.com/skills",
+    url: "https://jyotirmayabehera.com/skills",
   },
 };
 
