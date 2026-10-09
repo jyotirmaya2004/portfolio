@@ -8,26 +8,17 @@ import {
   FaLinkedinIn,
   FaYoutube,
   FaInstagram,
-  FaRedditAlien,
-  FaFacebookF,
-  FaTelegramPlane,
-  FaMediumM,
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { SiThreads, SiLeetcode } from "react-icons/si";
+import { SiLeetcode } from "react-icons/si";
 
 const socialChannels = [
   { label: "GitHub", href: contactInfo.github, icon: FaGithub },
   { label: "LinkedIn", href: contactInfo.linkedin, icon: FaLinkedinIn },
   { label: "X (Twitter)", href: contactInfo.twitter, icon: FaXTwitter },
-  { label: "LeetCode", href: "https://leetcode.com/u/jyotirmaya2004", icon: SiLeetcode },
-  { label: "Instagram", href: "https://instagram.com/jyotirmaya2004", icon: FaInstagram },
   { label: "YouTube", href: "https://youtube.com/@jyotirmaya2004", icon: FaYoutube },
-  { label: "Telegram", href: "https://t.me/jyotirmaya2004", icon: FaTelegramPlane },
-  { label: "Reddit", href: "https://reddit.com/user/jyotirmaya2004", icon: FaRedditAlien },
-  { label: "Threads", href: "https://threads.net/@jyotirmaya2004", icon: SiThreads },
-  { label: "Medium", href: "https://medium.com/@jyotirmaya2004", icon: FaMediumM },
-  { label: "Facebook", href: "https://facebook.com/jyotirmaya2004", icon: FaFacebookF },
+  { label: "Instagram", href: "https://instagram.com/jyotirmaya2004", icon: FaInstagram },
+  { label: "LeetCode", href: "https://leetcode.com/u/jyotirmaya2004", icon: SiLeetcode },
 ];
 
 export default function Footer() {
@@ -60,14 +51,6 @@ export default function Footer() {
             <div className="text-base sm:text-lg text-white/90 mt-2 font-sans font-medium">
               Full-Stack Developer & AI Systems Engineer
             </div>
-            <div className="text-xs sm:text-sm text-white/60 mt-1 font-mono flex items-center gap-1.5">
-              <span>Bhubaneswar, Odisha, India</span>
-            </div>
-
-            <p className="text-sm sm:text-base text-white/80 mt-6 max-w-lg leading-relaxed">
-              Have an engineering challenge, enterprise role, or research collaboration to discuss?
-              Let’s connect and build something exceptional.
-            </p>
 
             {/* Direct Email Link */}
             <div className="mt-6 flex flex-wrap items-center gap-4">
@@ -79,9 +62,6 @@ export default function Footer() {
                 <span>Get in touch via email</span>
                 <span className="warrow" aria-hidden="true">→</span>
               </a>
-              <span className="font-mono text-xs text-white/60">
-                {contactInfo.email}
-              </span>
             </div>
 
             {/* Social Channels */}
@@ -123,7 +103,7 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#work" className="hover:text-[var(--color-accent)] transition-colors">
+                  <Link href="/#experience" className="hover:text-[var(--color-accent)] transition-colors">
                     Experience Track
                   </Link>
                 </li>
@@ -185,7 +165,7 @@ export default function Footer() {
                 </li>
                 <li>
                   <a
-                    href="https://aptixa.jyotirmayabehera.com"
+                    href="https://aptixa.vercel.app"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-[var(--color-accent)] transition-colors inline-flex items-center gap-1.5"

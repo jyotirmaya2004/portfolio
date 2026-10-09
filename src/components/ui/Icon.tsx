@@ -8,6 +8,7 @@ export interface IconProps extends React.SVGProps<SVGSVGElement> {
     | "twitter"
     | "email"
     | "arrow-right"
+    | "arrow-left"
     | "external-link"
     | "code"
     | "sparkle"
@@ -84,6 +85,13 @@ export function Icon({
         <svg {...commonProps}>
           <path d="M5 12h14" />
           <path d="m12 5 7 7-7 7" />
+        </svg>
+      );
+    case "arrow-left":
+      return (
+        <svg {...commonProps}>
+          <path d="M19 12H5" />
+          <path d="m12 19-7-7 7-7" />
         </svg>
       );
     case "external-link":

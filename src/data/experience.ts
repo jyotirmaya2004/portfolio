@@ -1,14 +1,33 @@
 import experienceData from "./experience.json";
 
-export interface Experience {
-  title: string;
+export interface ExperienceItem {
+  type: "experience";
+  id: string;
   organization: string;
-  project: string;
-  period?: string;
-  description: string;
-  technologies: string[];
-  highlights?: string[];
+  role: string;
+  period: string;
+  tag: string;
+  summary: string;
+  challenge?: string;
+  takeaways?: string[];
+  technologies?: string[];
 }
 
-export const experiences: Experience[] = experienceData as Experience[];
-export default experiences;
+export const experiencesData: ExperienceItem[] = (
+  experienceData as Omit<ExperienceItem, "type">[]
+).map((item) => ({
+  ...item,
+  type: "experience" as const,
+}));
+
+export const experiences = experiencesData;
+
+export function getAllExperiences(): ExperienceItem[] {
+  return experiencesData;
+}
+
+export function getExperienceById(id: string): ExperienceItem | undefined {
+  return experiencesData.find((e) => e.id === id);
+}
+
+export default experiencesData;

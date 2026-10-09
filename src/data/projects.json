@@ -1,0 +1,81 @@
+[
+  {
+    "id": "netram",
+    "name": "Netram",
+    "subtitle": "AI Inspection & Real-Time CCTV Surveillance Platform",
+    "summary": "National-level Smart India Hackathon platform for the Ministry of Social Justice and Empowerment. Real-time CCTV streaming, surprise inspection scheduling, WebRTC video conferencing, and AI compliance analytics.",
+    "challenge": "The Ministry of Social Justice and Empowerment (DoSJE) required an unbiased, automated auditing system to monitor distributed welfare centers across India without predictability or human tampering.",
+    "features": [
+      "Real-Time CCTV Ingestion: Low-latency RTSP-to-WebRTC stream pipeline supporting 30+ concurrent inspection cameras.",
+      "Surprise Audit Dispatcher: Cryptographic scheduling algorithm generating non-predictable audit alerts for inspection officers.",
+      "Peer-to-Peer Video Conferencing: Encrypted WebRTC audio and video channels for live verification between central authorities and local nodes.",
+      "Automated Compliance Classifier: Computer vision models analyzing video feeds for protocol deviations and timestamp authenticity."
+    ],
+    "technologies": ["Next.js", "TypeScript", "Tailwind CSS", "PostgreSQL", "WebRTC", "AI Analytics"],
+    "liveUrl": "https://netram.vercel.app",
+    "githubUrl": "https://github.com/jyotirmaya2004/netram"
+  },
+  {
+    "id": "plantexa",
+    "name": "Plantexa",
+    "subtitle": "Two-Stage Deep Learning Plant Disease Diagnosis & Agriculture AI",
+    "summary": "A production-ready Streamlit web application that first validates whether an uploaded image is a plant leaf, then detects plant leaf diseases using a TensorFlow MobileNetV2 architecture. Includes detailed disease guidance and an agriculture-only AI assistant powered by the NVIDIA API.",
+    "challenge": "Real-world field images of crops frequently contain non-foliar noise (soil, hands, tools, or backgrounds) that cause standard single-stage models to produce false-positive disease classifications.",
+    "features": [
+      "Two-Stage Neural Pipeline: Strict leaf-vs-non-leaf validation gatekeeper before activating disease classification.",
+      "TensorFlow MobileNetV2 Model: Edge-optimized transfer learning model with process-level caching for rapid inference.",
+      "Multi-Format Vision Pipeline: Full support for JPG, JPEG, PNG, WEBP, BMP, GIF, TIFF, HEIC, and HEIF images resized to 224 x 224.",
+      "Top-3 Diagnostic Ranking: Calibrated probability confidence scores across top-3 disease predictions.",
+      "Agronomy Knowledge Base: Integrated diagnostic database covering pathology symptoms, root causes, treatments, and prevention protocols.",
+      "NVIDIA API Agriculture Assistant: Context-aware conversational AI with session memory strictly restricted to agricultural topics.",
+      "Sidebar-Free Streamlit Architecture: Mobile-first ergonomic layout with chat-style assistant input and modular decoupled prediction logic."
+    ],
+    "technologies": [
+      "Python",
+      "TensorFlow",
+      "MobileNetV2",
+      "Streamlit",
+      "NVIDIA API",
+      "Computer Vision",
+      "Deep Learning"
+    ],
+    "githubUrl": "https://github.com/jyotirmaya2004/plantexa"
+  },
+  {
+    "id": "prodexa",
+    "name": "Prodexa",
+    "subtitle": "Product Data Aggregator & Multi-Source Curator",
+    "summary": "A Flask-based web application that scrapes, curates, and manages product data from multiple e-commerce sources. Provides user authentication, personalized product management, and an intuitive dashboard for browsing and saving products.",
+    "challenge": "E-commerce product listings across multiple third-party marketplaces feature inconsistent schemas, unstable formatting, and strict anti-scraping defenses, requiring resilient automated curation and persistent user workspaces.",
+    "features": [
+      "Automated Web Scraping: Resilient scraping workers ingesting catalog listings from multiple e-commerce websites.",
+      "Intelligent Data Curation: Automated cleaning, schema normalization, and standardized product taxonomies.",
+      "User Authentication & Sessions: Secure user registration and login workflows with password validation and encrypted sessions.",
+      "Personalized Product Management: User dashboards to bookmark, organize, and manage curated items per account.",
+      "Parametric Search & Filter: Multi-attribute parametric search to filter products across categories and price bands.",
+      "Responsive Dynamic Dashboard: Mobile-first dashboard layout with dedicated product detail views.",
+      "Advanced Security Architecture: Dynamic rate-limiting, IP abuse tracking, password reset email workflows, and server-side image CAPTCHAs.",
+      "PostgreSQL Persistence: High-reliability relational persistence powered by Supabase with B-Tree indexing."
+    ],
+    "technologies": ["Flask", "Python", "PostgreSQL", "Supabase", "Web Scraping", "REST APIs"],
+    "githubUrl": "https://github.com/jyotirmaya2004/prodexa"
+  },
+  {
+    "id": "aptixa",
+    "name": "Aptixa",
+    "subtitle": "Mobile-First Placement Preparation & Quiz Platform",
+    "summary": "An all-in-one, mobile-first Placement Preparation & Quiz Platform designed to empower students and job aspirants preparing for campus placements, competitive exams (Bank PO, SSC, CAT, GATE, Railways), and technical interviews.",
+    "challenge": "Aspirants preparing for high-stakes placement rounds lack unified, mobile-friendly platforms that pair textbook-grade quantitative aptitude curriculum with proctored timed simulations and diagnostic feedback.",
+    "features": [
+      "Complete R.S. Aggarwal Integration: Digital coverage of R.S. Aggarwal's Quantitative Aptitude textbook across 39 chapters and 4,060+ objective-type questions.",
+      "Verified Solutions & Formulas: Step-by-step verified answer keys, detailed mathematical explanations, and formula reference sheets.",
+      "Mobile-First Architecture: Touch-optimized, responsive quiz runner built with React and Vite for smooth performance on handheld devices.",
+      "Competitive Exam Coverage: Targeted practice modules tailored for campus recruitment, Bank PO, SSC, CAT, GATE, and Railways.",
+      "Proctored Timed Testing: Dynamic countdown timers and anti-tamper sessions simulating real placement assessment environments.",
+      "Scalable Express Backend: Express REST API layer managing candidate progress, quiz sessions, and question taxonomies."
+    ],
+    "technologies": ["React", "Vite", "Express", "Node.js", "Tailwind CSS"],
+    "liveUrl": "https://aptixa.vercel.app",
+    "githubUrl": "https://github.com/jyotirmaya2004/aptixa"
+  }
+]

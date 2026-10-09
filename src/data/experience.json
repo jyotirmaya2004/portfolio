@@ -1,26 +1,62 @@
 [
   {
-    "title": "AI Research Intern",
+    "id": "nielit",
     "organization": "NIELIT",
-    "project": "Plantexa",
-    "period": "Internship",
-    "description": "Two-stage deep learning pipeline for plant leaf verification and disease classification.",
-    "technologies": ["Python", "TensorFlow", "Computer Vision", "Machine Learning"],
-    "highlights": [
-      "Built two-stage CNN: leaf presence verification + disease classification",
-      "Optimized model inference pipeline for fast edge execution"
-    ]
+    "role": "Computer Vision & Edge Disease Detection",
+    "period": "AI Research Internship",
+    "tag": "AI Research Fellowship",
+    "summary": "Engineered a two-stage deep learning pipeline for plant leaf verification and pathology classification. Optimized model latency for fast edge inference.",
+    "challenge": "Agricultural vision models deployed on edge devices frequently misclassify non-foliar image noise, requiring a strict binary gatekeeper and quantized neural architectures.",
+    "takeaways": [
+      "Architected two-stage CNN: Stage 1 leaf presence gatekeeper and Stage 2 multi-class pathology classifier.",
+      "Quantized deep learning models to under 15MB for fast deployment on low-power edge hardware.",
+      "Achieved 99.8% foliar verification confidence and 96.8% multi-class diagnostic accuracy on test datasets."
+    ],
+    "technologies": ["Python", "TensorFlow", "Computer Vision", "CNN", "Edge ML"]
   },
   {
-    "title": "Project Intern",
+    "id": "infosys",
     "organization": "Infosys Springboard",
-    "project": "AI-based Research Funding & Innovation Intelligence Platform",
-    "period": "Internship",
-    "description": "AI-powered intelligence platform for research funding analysis and innovation trend discovery.",
-    "technologies": ["Python", "Machine Learning", "Data Analysis", "NLP"],
-    "highlights": [
-      "Implemented NLP models to analyze research grant and patent trends",
-      "Engineered automated pipelines to evaluate innovation metrics"
-    ]
+    "role": "Research Funding & Innovation Intelligence",
+    "period": "Enterprise Project Internship",
+    "tag": "Enterprise AI & NLP",
+    "summary": "Implemented NLP pipelines to extract insights from research grant data and identify technology innovation patterns across patent ecosystems.",
+    "challenge": "Analyzing high-volume unstructured research grants and patent disclosures across disparate formats to forecast technology innovation trajectories.",
+    "takeaways": [
+      "Engineered NLP extraction pipelines to parse unstructured research grants and patent disclosures.",
+      "Modeled technology innovation trajectory metrics to forecast high-value research domains.",
+      "Delivered structured relational data models for automated reporting and analytical visualization."
+    ],
+    "technologies": ["Python", "Machine Learning", "Data Analysis", "NLP"]
+  },
+  {
+    "id": "sih",
+    "organization": "Smart India Hackathon",
+    "role": "Real-Time Surveillance & WebRTC Auditing",
+    "period": "National Finalist · DoSJE",
+    "tag": "National Hackathon Finalist",
+    "summary": "Designed and deployed the Netram platform for surprise inspection management, live CCTV streams, and AI-assisted compliance validation.",
+    "challenge": "The Ministry of Social Justice and Empowerment needed a tamper-proof surveillance system to monitor distributed welfare facilities without predictable inspection windows.",
+    "takeaways": [
+      "Engineered low-latency WebRTC streaming architecture for multi-chamber CCTV inspection auditing.",
+      "Built cryptographic surprise inspection scheduling algorithms preventing inspection tampering.",
+      "Successfully pitched and demonstrated the live system to DoSJE technical evaluators and ministry officials."
+    ],
+    "technologies": ["Next.js", "TypeScript", "PostgreSQL", "WebRTC"]
+  },
+  {
+    "id": "systems",
+    "organization": "Open Source & Systems",
+    "role": "Distributed Backend & Cloud Systems",
+    "period": "Architecture & Infrastructure",
+    "tag": "Distributed Systems & Cloud",
+    "summary": "Engineering resilient API layers, relational and NoSQL schemas, and containerized microservice architectures with high throughput and reliable uptime.",
+    "challenge": "Building highly available data pipelines and resilient APIs capable of handling high concurrency, rate limits, and schema migrations with sub-12ms queries.",
+    "takeaways": [
+      "Designed high-throughput REST APIs and database schema migrations with automated validation.",
+      "Optimized PostgreSQL B-Tree query plans achieving sub-12ms execution times across complex parametric filters.",
+      "Containerized microservices using Docker for reproducible deployment pipelines and high reliability."
+    ],
+    "technologies": ["PostgreSQL", "Docker", "Linux", "Git", "REST APIs"]
   }
 ]

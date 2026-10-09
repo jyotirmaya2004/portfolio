@@ -6,7 +6,7 @@ const highlights = [
   {
     title: "Building with purpose",
     description: "Practical full-stack and AI/ML projects designed to solve real problems.",
-    href: "/#work",
+    href: "/#projects",
     linkLabel: "View projects",
     iconName: "code" as const,
   },
