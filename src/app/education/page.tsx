@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import EducationContent from "@/components/EducationContent";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Education",
@@ -19,7 +20,10 @@ export const metadata: Metadata = {
 export default function EducationPage() {
   return (
     <>
-      <EducationContent />
+      <div className="pt-6">
+        <EducationContent />
+      </div>
+      <Footer />
     </>
   );
 }

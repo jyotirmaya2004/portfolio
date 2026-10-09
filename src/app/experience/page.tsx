@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
-import ExperienceContent from "@/components/ExperienceContent";
+import WorkAndExperience from "@/components/WorkAndExperience";
+import PageHeader from "@/components/PageHeader";
+import GsapInit from "@/components/GsapInit";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Experience",
@@ -19,7 +22,15 @@ export const metadata: Metadata = {
 export default function ExperiencePage() {
   return (
     <>
-      <ExperienceContent />
+      <GsapInit />
+      <div className="pad-cards mx-auto w-full max-w-[1440px] pt-24 sm:pt-28 lg:pt-32">
+        <PageHeader
+          title="Experience"
+          description="Internships, research fellowships, and engineering work across enterprise and open systems."
+        />
+      </div>
+      <WorkAndExperience initialTab="experience" />
+      <Footer />
     </>
   );
 }

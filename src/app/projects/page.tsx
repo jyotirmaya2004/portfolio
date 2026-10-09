@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
-import ProjectsContent from "@/components/ProjectsContent";
+import WorkAndExperience from "@/components/WorkAndExperience";
+import PageHeader from "@/components/PageHeader";
+import GsapInit from "@/components/GsapInit";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "Projects",
@@ -19,7 +22,15 @@ export const metadata: Metadata = {
 export default function ProjectsPage() {
   return (
     <>
-      <ProjectsContent />
+      <GsapInit />
+      <div className="pad-cards mx-auto w-full max-w-[1440px] pt-24 sm:pt-28 lg:pt-32">
+        <PageHeader
+          title="Projects"
+          description="Featured engineering systems, machine learning pipelines, and production full-stack applications."
+        />
+      </div>
+      <WorkAndExperience initialTab="projects" />
+      <Footer />
     </>
   );
 }

@@ -31,7 +31,7 @@
       "name": "Outer Orbit",
       "radius": 0.455,
       "insetPercentage": 4.5,
-      "opacityClass": "opacity-80 dark:opacity-80",
+      "opacityClass": "opacity-80",
       "nodes": [
         {
           "position": "facebook",
@@ -90,7 +90,7 @@
       "name": "Middle Orbit",
       "radius": 0.35,
       "insetPercentage": 15,
-      "opacityClass": "opacity-65 dark:opacity-70",
+      "opacityClass": "opacity-65",
       "nodes": [
         {
           "position": "youtube",
@@ -149,7 +149,7 @@
       "name": "Inner Orbit",
       "radius": 0.245,
       "insetPercentage": 25.5,
-      "opacityClass": "opacity-50 dark:opacity-60",
+      "opacityClass": "opacity-50",
       "nodes": [
         {
           "position": "leetcode",

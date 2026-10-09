@@ -1,0 +1,552 @@
+================================================================================
+           PORTFOLIO WEBSITE REQUIREMENTS & FUNCTIONAL SPECIFICATION
+================================================================================
+Project: Jyotirmaya Behera — Developer Portfolio
+Website URL: https://jyotirmayabehera.com
+Target Audience: Recruiters, Engineering Managers, Tech Leads, Collaborators, Clients
+Framework Stack: Next.js 15 (App Router), React 19, TypeScript, Tailwind CSS
+Document Purpose: Complete functional & design specification to generate high-end,
+                  production-ready UI designs (Figma, v0, Bolt, Lovable, CSS/HTML).
+================================================================================
+
+
+--------------------------------------------------------------------------------
+1. PROJECT OVERVIEW & VALUE PROPOSITION
+--------------------------------------------------------------------------------
+The website is a high-performance, minimalist-luxury developer portfolio for 
+Jyotirmaya Behera — a software developer and Integrated MCA student at Utkal 
+University. The platform showcases expertise across:
+  - Artificial Intelligence & Machine Learning (Computer Vision, NLP)
+  - Full-Stack Web Development (Next.js, React, Node.js, Python)
+  - Backend Systems, Databases & Cloud Infrastructure
+
+Key Differentiators in the UI:
+  - Minimalist-luxury editorial aesthetic (editorial typography + champagne gold accents).
+  - High interactivity with custom celestial/orbital physics representations for skills and social links.
+  - Floating instant contact drawer / chat widget with email dispatch and anti-spam defenses.
+  - Seamless zero-flash light/dark theme switching.
+
+
+--------------------------------------------------------------------------------
+2. DESIGN SYSTEM & VISUAL SPECIFICATION
+--------------------------------------------------------------------------------
+
+2.1 COLOR PALETTE & DESIGN TOKENS
+  A. Light Mode (Warm Editorial Luxury):
+     - Background Main:       #FAF9F6 (Warm off-white / Alabaster)
+     - Surface / Card:        #FFFFFF (Pure white)
+     - Elevated Surface:      #F5F3EF (Subtle warm cream)
+     - Foreground / Text:     #1A1A1A (Deep charcoal / almost black)
+     - Muted Text:            #5C5C5C (Balanced reading grey)
+     - Subtle Text:           #9A9A9A (Light metadata grey)
+     - Border Color:          #E8E5E0 (Warm subtle border)
+     - Border Hover:          #D4D1CB (Defined hover border)
+     - Accent (Gold):         #B8860B (Dark champagne gold)
+     - Accent Hover:          #996D09 (Deep warm bronze)
+     - Accent Light Tint:     #F5E6A0 (Soft golden wash)
+     - Accent Glow:           rgba(184, 134, 11, 0.15)
+     - Success Indicator:     #0D7A3F (Forest emerald green)
+     - Warning Indicator:     #B86B00 (Rich amber)
+
+  B. Dark Mode (Deep Charcoal Luxury):
+     - Background Main:       #0D0D0D (Deep obsidian / charcoal)
+     - Surface / Card:        #161616 (Slightly elevated dark tile)
+     - Elevated Surface:      #1E1E1E (Layered dark container)
+     - Foreground / Text:     #FAFAFA (Crisp high-contrast white)
+     - Muted Text:            #A3A3A3 (Legible mid-tone grey)
+     - Subtle Text:           #737373 (Low-key metadata grey)
+     - Border Color:          #2A2A2A (Subtle charcoal border)
+     - Border Hover:          #3D3D3D (Highlighted dark border)
+     - Accent (Gold):         #D4A813 (Vibrant luminous gold)
+     - Accent Hover:          #F0C020 (Brighter radiant gold)
+     - Accent Light Tint:     #3D3410 (Subtle dark gold amber backing)
+     - Accent Glow:           rgba(212, 168, 19, 0.18)
+     - Success Indicator:     #22C55E (Luminous green)
+     - Warning Indicator:     #F59E0B (Luminous amber)
+
+2.2 TYPOGRAPHY HIERARCHY
+  - Primary Font Family: Inter (Google Font) - sans-serif, neutral, high-legibility.
+  - Monospace Font: Geist Mono or System Mono (for tech tags, metadata, dates).
+  - Type Scale:
+     * Hero Title (H1):     32px - 60px (clamp / responsive), 700 bold, tracking -0.03em
+     * Section Heading:     24px - 36px, 700 bold, tracking -0.02em
+     * Subheadings (H2/H3): 18px - 22px, 600 semi-bold
+     * Body Large:          18px - 20px, 400 regular, line-height 1.6
+     * Body Regular:        15px - 16px, 400 regular, line-height 1.6
+     * Caption / Metadata:  11px - 13px, 500 medium, uppercase or mono tracking
+
+2.3 SURFACES, ELEVATION & GLASSMORPHISM
+  - Border Radii: 8px to 16px on modern cards, 9999px (full pill) on badges/chips.
+  - Glassmorphism effect:
+     * Background: rgba(var(--bg-surface), 0.8) with backdrop-filter: blur(20px).
+     * Border: 1px solid var(--border) with subtle gradient or ambient glow on hover.
+  - Hover Motion: Subtle translateY(-4px to -6px), border color tinting to gold,
+    ambient drop-shadow glow expansion.
+
+2.4 THEME SWITCH TRANSITION
+  - Smooth global CSS transition (350ms cubic-bezier) applied to background-color,
+    border-color, text, fill, stroke, and box-shadow during toggle.
+  - Anti-flash inline script in <head> checking localStorage('theme') and system
+    prefers-color-scheme before render.
+
+
+--------------------------------------------------------------------------------
+3. INFORMATION ARCHITECTURE & NAVIGATION SYSTEM
+--------------------------------------------------------------------------------
+
+3.1 GLOBAL NAVBAR
+  - Positioning: Fixed header at top (height: 72px / 4.5rem), z-index 50.
+  - Scroll state:
+     * At top of page: Seamless transparent background.
+     * On scroll (>20px): Glassmorphism blur (24px), border-b, subtle shadow.
+  - Branding:
+     * Left side monogram logo "JB" with gold gradient text effect, links to "/".
+  - Desktop Navigation Items:
+     * About      -> /about
+     * Projects   -> /projects
+     * Experience -> /experience
+     * Skills     -> /skills
+     * Education  -> /education
+     * Contact    -> /contact
+  - Active Link State:
+     * Gold accent text color + subtle background tint + bottom gold underline indicator.
+  - Theme Toggle Button:
+     * Embedded in navbar with animated Sun/Moon SVG icons, 360-degree rotation transition.
+  - Mobile Navigation:
+     * Hamburger menu button with morphing 3-bar icon into "X" close icon.
+     * Opens an ultra-compact floating capsule island dropdown from top-right.
+     * Contains all route links with icon + text label + theme toggle.
+     * Background dim backdrop overlay with blur (tap to dismiss, escape key dismiss).
+     * Locks body scroll while open.
+
+3.2 PAGE TRANSITIONS
+  - Custom page entrance animation: translateY(12px) -> translateY(0) with 
+    opacity fade-in (400ms cubic-bezier).
+
+
+--------------------------------------------------------------------------------
+4. PAGE SPECIFICATIONS & DETAILED FUNCTIONALITY
+--------------------------------------------------------------------------------
+
+================================================================================
+PAGE 1: HOME (HERO SECTION) — Route: "/"
+================================================================================
+Purpose: High-impact introduction establishing identity, philosophy, and authority.
+
+Components & Layout:
+  1. Ambient Visual Background:
+     - Two large floating radial gradient orbs (gold/amber tint, blur-3xl, animated float).
+     - Ultra-subtle geometric vector grid pattern overlay (5% opacity).
+  2. Headline & Philosophy:
+     - Dominant Tagline (H1): "Turning problems into opportunities."
+     - Decorative accent bar: 48px linear gradient line leading into a sparkle icon.
+  3. Personal Identity:
+     - Name: "Jyotirmaya Behera"
+     - Subtitle: Integrated MCA student at Utkal University, software developer.
+     - Narrative: "Exploring modern web technologies and AI/ML through practical projects, 
+       with a focus on building useful solutions to real-world problems."
+  4. Call-to-Action (CTA) Buttons:
+     - Primary Button: "View Projects" (Solid gold background, white text, arrow icon hover shift).
+     - Secondary Button: "Contact Me" (Outlined surface button, border hover to gold, arrow icon).
+     - Mobile: 2-column side-by-side compact grid. Desktop: Inline flex row.
+  5. Profile Visual Frame:
+     - Desktop: Elegant circular portrait frame (224px-256px) with double gold gradient outer ring,
+       soft ambient back-glow, and floating micro-badges (code bracket & sparkle badges).
+     - Mobile: Compact circular avatar (64px-80px) positioned inline next to the name.
+  6. Quick Social Icon Bar:
+     - GitHub, LinkedIn, Direct Email icons with subtle background hover rings.
+
+
+================================================================================
+PAGE 2: ABOUT ME — Route: "/about"
+================================================================================
+Purpose: Detailed personal and professional narrative, current priorities, and core focus areas.
+
+Components & Layout:
+  1. Page Header:
+     - Title: "About Jyotirmaya Behera"
+     - Description: "Software developer and student exploring the intersection of web technologies and AI/ML."
+     - Left gold vertical bar indicator.
+  2. Main Narrative & Highlights (2-Column Grid on Desktop):
+     - Left Column (Bio Card):
+       * Comprehensive story: Integrated MCA at Utkal University (Bhubaneswar, Odisha).
+       * Foundation in core computer science, data structures, and algorithms.
+       * Dedication to clean, maintainable code, real-world application, and open source.
+       * Interactive pill tags: "Web development", "AI / ML", "Open source" (hover float animation).
+     - Right Column (Aside Card - "Currently focused on"):
+       * Elevated container with gold uppercase label: "CURRENTLY FOCUSED ON".
+       * Primary statement: "Bridging academic learning with real-world application."
+       * Subtext: "Exploring frameworks, AI advancements, and ways to turn ideas into useful software."
+  3. Directional Section Links (3-Card Grid):
+     - Card 1: "Building with purpose" -> Links to Projects (Icon: Code brackets).
+     - Card 2: "Learning in depth" -> Links to Education (Icon: Graduation cap).
+     - Card 3: "Always exploring" -> Links to Skills (Icon: Open book).
+     - Hover states: Card elevates with shadow, arrow icon shifts rightwards.
+
+
+================================================================================
+PAGE 3: PROJECTS SHOWCASE — Route: "/projects"
+================================================================================
+Purpose: Interactive showcase of engineered software systems, AI pipelines, and web applications.
+
+Components & Layout:
+  1. Page Header:
+     - Title: "Projects"
+     - Subtitle: "Featured engineering projects and applications."
+  2. 2-Column Responsive Card Grid (Cards adapt from 1 column on mobile to 2 columns on tablet/desktop).
+  3. Project Card Specifications:
+     - Container: Glassmorphism surface tile with rounded-2xl border, backdrop blur, ambient hover glow.
+     - Status Header:
+       * Status Badge: "DEPLOYED" (Live green pulse indicator) OR "COMPLETED" (Gold solid dot).
+       * Primary Tech Label: Monospace uppercase label in top-right (e.g., "NEXT.JS", "PYTHON", "FLASK").
+     - Project Title: Bold H2 with hover color shift to gold.
+     - Domain Classification: Gold text label (e.g., "AI · Monitoring Platform", "Full Stack · EdTech").
+     - Description: Crisp summary highlighting problem solved, architecture, and features.
+     - Tech Stack Pills: Group of badges representing languages, frameworks, databases, libraries.
+     - Action Buttons:
+       * "Live Demo" button (external link icon, gold fill button) — only present if project is deployed.
+       * "Code" button (GitHub icon, surface button with border) — links to GitHub repository.
+
+  4. Current Project Catalogue:
+     ---------------------------------------------------------------------------
+     Project 1: Netram
+       - Classification: AI · Monitoring Platform (SIH Problem Statement)
+       - Description: Real-time monitoring and inspection platform featuring CCTV integration,
+         surprise inspections, WebRTC video conferencing, inspection management, and AI analytics for DoSJE.
+       - Tech Stack: Next.js, TypeScript, Tailwind CSS, PostgreSQL, WebRTC
+       - Status: DEPLOYED (Live at: https://netram.vercel.app)
+       - Repo: https://github.com/jyotirmaya2004/netram
+
+     Project 2: Plantexa
+       - Classification: AI/ML · Computer Vision
+       - Description: Two-stage AI-based plant leaf disease detection system. Stage 1 verifies
+         whether the image is a valid leaf; Stage 2 classifies the specific plant disease. Built at NIELIT.
+       - Tech Stack: Python, TensorFlow, Computer Vision, Machine Learning
+       - Status: COMPLETED
+       - Repo: https://github.com/jyotirmaya2004/plantexa
+
+     Project 3: Prodexa
+       - Classification: Full Stack · Data Engineering
+       - Description: Product Data Aggregator & Curator platform featuring web scraping,
+         product curation, advanced search and filtering, and secure user authentication.
+       - Tech Stack: Flask, Python, PostgreSQL, Supabase, Web Scraping
+       - Status: COMPLETED
+       - Repo: https://github.com/jyotirmaya2004/prodexa
+
+     Project 4: Aptixa
+       - Classification: Full Stack · EdTech
+       - Description: Placement Preparation & Quiz Platform focused on quantitative aptitude
+         and adaptive learning-oriented quiz functionality for campus placements.
+       - Tech Stack: React, Node.js, Express, MongoDB
+       - Status: DEPLOYED (Live at: https://aptixa.jyotirmayabehera.com)
+       - Repo: https://github.com/jyotirmaya2004/aptixa
+     ---------------------------------------------------------------------------
+
+
+================================================================================
+PAGE 4: WORK EXPERIENCE & INTERNSHIPS — Route: "/experience"
+================================================================================
+Purpose: Chronological engineering journey showcasing research, internships, and project work.
+
+Components & Layout:
+  1. Page Header:
+     - Title: "Experience"
+     - Subtitle: "Internships and engineering work."
+  2. Vertical Timeline Architecture:
+     - Left vertical timeline guide line (2px solid var(--border)).
+     - Checkpoint Node Marker: Absolute positioned circular pulse checkpoint on the timeline with gold center.
+     - Experience Cards: Glassmorphism card container with hover elevation and ambient glow.
+  3. Experience Card Details:
+     - Organization Monogram: Distinct square badge (e.g., "NI", "IS") with mono gold font.
+     - Role & Project Title: Prominent H2 with project name, organization, and role title.
+     - Status & Period Badges: Completed badge (green indicator) + Internship period tag.
+     - Role Description: Overview of engineering scope and problem space.
+     - Interactive Takeaways Accordion:
+       * "View key takeaways" / "Hide key takeaways" toggle with animated chevron.
+       * Expands an elevated sub-card with gold sparkle bullet points listing key achievements.
+     - Technology Badges: Horizontal wrap list of tools and technologies utilized.
+
+  4. Experience Catalogue:
+     ---------------------------------------------------------------------------
+     Position 1: AI Research Intern
+       - Organization: NIELIT (National Institute of Electronics & Information Technology)
+       - Project: Plantexa
+       - Period: Internship
+       - Description: Two-stage deep learning pipeline for plant leaf verification and disease classification.
+       - Key Highlights:
+         * Built two-stage CNN: leaf presence verification + disease classification.
+         * Optimized model inference pipeline for fast edge execution.
+       - Tech Stack: Python, TensorFlow, Computer Vision, Machine Learning
+
+     Position 2: Project Intern
+       - Organization: Infosys Springboard
+       - Project: AI-based Research Funding & Innovation Intelligence Platform
+       - Period: Internship
+       - Description: AI-powered intelligence platform for research funding analysis and innovation trend discovery.
+       - Key Highlights:
+         * Implemented NLP models to analyze research grant and patent trends.
+         * Engineered automated pipelines to evaluate innovation metrics.
+       - Tech Stack: Python, Machine Learning, Data Analysis, NLP
+     ---------------------------------------------------------------------------
+
+
+================================================================================
+PAGE 5: TECHNICAL SKILLS — Route: "/skills"
+================================================================================
+Purpose: Highly memorable, dynamic celestial/orbital representation of tech competencies.
+
+Components & Layout:
+  1. Page Header / Layout:
+     - Full viewport orbital constellation canvas (responsive sizing clamp: 20rem to 42rem square).
+     - Radial ambient glow background.
+  2. Interactive Orbital Constellation Architecture:
+     - Three Concentric Circular Orbit Rings:
+       * Orbit 1: Inner Orbit ("Core Languages", radius: 0.245, inset: 25.5%, opacity: 50%)
+       * Orbit 2: Middle Orbit ("Libraries & Frameworks", radius: 0.35, inset: 15%, opacity: 60%)
+       * Orbit 3: Outer Orbit ("Tools & Infrastructure", radius: 0.455, inset: 4.5%, opacity: 75%)
+     - Central Core Hub (The Sun):
+       * Centered circular button/node (size 48px - 64px) with code bracket icon.
+       * Tooltip on hover/focus: "Core Stack: Skills & Technologies".
+     - 15 Planetary Skill Nodes:
+       * Positioned algorithmically around orbit tracks using trigonometric polar-to-Cartesian coords:
+         left = 50 + radius * 100 * cos(angle)
+         top  = 50 + radius * 100 * sin(angle)
+       * Each node has official brand-colored icon (Python blue, TS blue, React cyan, Docker blue, etc.).
+       * Node Hover State: Scale up (1.1x), illuminated brand color aura/glow (blur-md), and floating tooltip label.
+
+  3. Technical Skill Distribution:
+     - Inner Orbit (Languages):
+       * Python (angle -90°)
+       * TypeScript (angle -18°)
+       * JavaScript (angle 54°)
+       * C++ (angle 126°)
+       * Java (angle 198°)
+     - Middle Orbit (Frontend & Backend):
+       * React (angle -54°)
+       * Next.js (angle 18°)
+       * Node.js (angle 90°)
+       * Express (angle 162°)
+       * Tailwind CSS (angle 234°)
+     - Outer Orbit (DevOps, Data & Tools):
+       * Docker (angle -90°)
+       * Git (angle -18°)
+       * Linux (angle 54°)
+       * PostgreSQL (angle 126°)
+       * MongoDB (angle 198°)
+
+  4. Categorized Proficiency Data (Complementary view for table/grid UI implementations):
+     - Languages: Python (L3), Java (L3), C (L3), TypeScript (L3), JavaScript (L3), C++ (L2), R (L2), PHP (L1)
+     - Frontend: Next.js (L3), React (L3), Tailwind CSS (L3), HTML (L3), CSS (L3)
+     - Backend: Node.js (L3), Express (L3), FastAPI (L2), Flask (L2)
+     - Databases: PostgreSQL (L3), MongoDB (L2), MySQL (L2), Supabase (L2)
+     - AI & ML: Machine Learning (L3), Computer Vision (L2), TensorFlow (L2), Scikit-learn (L2)
+     - DevOps: Git (L3), GitHub (L3), Linux (L3), Docker (L2)
+     *(Proficiency Levels: 1 = Familiar, 2 = Intermediate, 3 = Advanced/Expert)*
+
+
+================================================================================
+PAGE 6: EDUCATION — Route: "/education"
+================================================================================
+Purpose: Academic credentials, university honors, and foundation in computer science.
+
+Components & Layout:
+  1. Page Header:
+     - Title: "Education"
+     - Subtitle: "Academic background and qualifications."
+  2. Academic Timeline Hierarchy:
+     - Clean vertical border cards with gold accent left bar.
+     - Degree / Certificate title (H2, bold).
+     - Institution name & location (Utkal University, Bhubaneswar, Odisha).
+     - Timeline duration & CGPA / Percentage score badge.
+     - Curriculum and key coursework overview.
+
+  3. Academic History:
+     ---------------------------------------------------------------------------
+     Degree: Integrated MCA (Master of Computer Applications)
+       - Institution: Utkal University, Bhubaneswar, Odisha
+       - Period: 2024 – 2029 (5-Year Integrated Master's Program)
+       - Grade / Score: 9.32 / 10 CGPA (Current)
+       - Focus: Comprehensive study of computer science fundamentals, software development,
+         data structures, algorithm design, relational databases, distributed systems, and AI/ML.
+
+     Higher Secondary: Class 12 (Science Stream)
+       - Institution: Fakir Mohan Higher Secondary School, Baleswar, Odisha
+       - Period: 2020 – 2022
+       - Grade / Score: 92%
+       - Focus: Mathematics, Physics, Chemistry, and Information Technology.
+
+     Secondary: Class 10 (High School)
+       - Institution: KBKS High School, Tapandia, Baleswar, Odisha
+       - Period: 2018 – 2020
+       - Grade / Score: 95% (Completed with distinction)
+     ---------------------------------------------------------------------------
+
+
+================================================================================
+PAGE 7: CONTACT & SOCIAL GALAXY — Route: "/contact"
+================================================================================
+Purpose: Omnichannel presence connecting visitors across developer, professional, and social platforms.
+
+Components & Layout:
+  1. Page Header:
+     - Title: "Contact"
+     - Subtitle: "Connect across social platforms or get in touch directly."
+  2. 3-Orbit Social Constellation (Visual Mirror of Skills Galaxy):
+     - Center Hub: Rotating 3D Globe Icon linking to "jyotirmayabehera.com".
+     - Outer, Middle, and Inner Orbit Rings with 15+ interactive nodes:
+       * Inner Orbit:
+         - Email (mailto:hello@jyotirmayabehera.com)
+         - LeetCode (https://leetcode.com/u/jyotirmaya2004)
+         - Medium (https://medium.com/@jyotirmaya2004)
+         - Quora
+         - Substack
+       * Middle Orbit:
+         - X / Twitter (https://twitter.com/jyotirmaya2004)
+         - Reddit (https://reddit.com/user/jyotirmaya2004)
+         - YouTube (https://youtube.com/@jyotirmaya2004)
+         - Instagram (https://instagram.com/jyotirmaya2004)
+         - Pinterest
+       * Outer Orbit:
+         - LinkedIn (https://linkedin.com/in/jyotirmaya2004)
+         - GitHub (https://github.com/jyotirmaya2004)
+         - Telegram (https://t.me/jyotirmaya2004)
+         - Threads (https://threads.net/@jyotirmaya2004)
+         - Facebook (https://facebook.com/jyotirmaya2004)
+     - Interactive behavior:
+       * Hovering over any social node triggers brand color aura glow, scale bounce, and label tooltip.
+       * Clicking launches official profile in new secure tab (target="_blank" rel="noopener noreferrer").
+
+
+================================================================================
+7. FLOATING CONTACT CHAT WIDGET ("LET'S TALK")
+================================================================================
+Purpose: Always-accessible, instant messaging drawer floating on all pages.
+
+7.1 FLOATING LAUNCHER BUTTON
+  - Position: Fixed bottom-right corner (bottom: 24px, right: 24px), z-index 50.
+  - Appearance: Pill or circular gold button with message bubble icon.
+  - Notification Dot: Emerald green pinging badge indicating "Available to talk".
+  - Hover / Focus: Scales up with gold glow halo.
+
+7.2 MODAL / SLIDE-OVER DRAWER DIALOG
+  - Backdrop: Dark translucent backdrop overlay with click-to-dismiss functionality.
+  - Mobile behavior: Bottom sheet modal sliding up from bottom edge.
+  - Desktop behavior: Floating popover card anchored in bottom-right corner (width: ~380px-420px).
+  - Accessibility & Controls:
+     * Focus lock inside modal when opened (auto-focus on Name input).
+     * Escape key dismisses modal.
+     * Close "X" button in header.
+     * Auto-closes on route change or browser history navigation.
+
+7.3 FORM FIELDS & CLIENT-SIDE VALIDATION
+  1. Name Field:
+     - Type: Text, Required.
+     - Bounds: 1 to 100 characters.
+     - Placeholder: "Your Name".
+  2. Email Field:
+     - Type: Email, Required.
+     - Validation: RFC-compliant regex pattern checking.
+     - Placeholder: "your.email@example.com".
+  3. Topic / Subject Field:
+     - Type: Select or Text, Optional (e.g., "Collaboration", "Hiring", "General Inquiry").
+  4. Message Field:
+     - Type: Textarea, Required.
+     - Bounds: Minimum 10 characters, maximum 2000 characters.
+     - Placeholder: "Write your message here...".
+  5. Honeypot Anti-Spam Trap:
+     - Hidden input field (`name="honeypot"`, hidden via CSS/aria-hidden).
+     - If populated by spam crawlers, submission is rejected silently.
+
+7.4 FEEDBACK & SUBMISSION LIFECYCLE
+  - Idle state: Clean inputs with subtle borders and clear focus rings.
+  - Loading state: Submit button displays animated spinner, inputs disabled.
+  - Success state: Form hides and displays checkmark animation:
+     "Message Sent! Thanks for reaching out. I'll get back to you shortly."
+     Includes a "Send Another Message" or "Close" button.
+  - Error state: Inline alert banner in red/amber explaining exact validation or network issue.
+
+
+--------------------------------------------------------------------------------
+8. BACKEND & API ARCHITECTURE
+--------------------------------------------------------------------------------
+
+8.1 CONTACT ENDPOINT — POST `/api/contact`
+  - Payload Schema (JSON):
+    {
+      "name": string (1-100 chars, required),
+      "email": string (valid email format, required),
+      "topic": string (optional),
+      "message": string (10-2000 chars, required),
+      "honeypot": string (optional, must be empty)
+    }
+
+  - Security & Defenses:
+     * IP Rate Limiting: Max 5 submissions per 10 minutes per IP address.
+       Returns HTTP 429 Too Many Requests if exceeded.
+     * Honeypot bot filtering: If honeypot is present, returns fake HTTP 200 without sending.
+     * HTML entity sanitization: Strips and escapes HTML characters (<, >, &, ", ') to prevent XSS.
+
+  - Email Service Dispatcher:
+     * Integrated with Resend API (HTTP POST to https://api.resend.com/emails).
+     * Generates responsive HTML email table + plain text fallback.
+     * Sets visitor's email in Reply-To header so direct replies reach the sender.
+     * Dev Mode Fallback: When EMAIL_API_KEY is unset (local development), prints clean
+       mock email payload to console and succeeds gracefully.
+
+  - Required Environment Variables:
+     * `CONTACT_EMAIL`: Destination inbox address (e.g., hello@jyotirmayabehera.com)
+     * `FROM_EMAIL`: Verified sender domain address (e.g., Portfolio <hello@verified-domain.com>)
+     * `EMAIL_API_KEY` or `RESEND_API_KEY`: Secret Resend API key (re_...)
+
+
+--------------------------------------------------------------------------------
+9. SEO, ACCESSIBILITY & PERFORMANCE REQUIREMENTS
+--------------------------------------------------------------------------------
+
+9.1 CANONICAL DOMAIN & SEO
+  - Primary Canonical Domain: https://jyotirmayabehera.com (Non-WWW strictly enforced).
+  - Sitemap: Dynamic Next.js route at `/sitemap.xml` registering all 7 routes:
+    `/`, `/about`, `/projects`, `/skills`, `/experience`, `/education`, `/contact`.
+  - Robots.txt: Clean crawling directives allowing all search engine bots.
+  - Structured Data (JSON-LD):
+    * `WebSite` Schema on root layout.
+    * `ProfilePage` and `Person` Schema on `/about` linking to GitHub and LinkedIn.
+  - Open Graph & Twitter Cards:
+    * og:image: 1200x630px card image (`/og-image.jpg`).
+    * Card type: `summary_large_image`.
+
+9.2 ACCESSIBILITY (WCAG 2.1 AA)
+  - Color contrast ratios exceed 4.5:1 for body copy and 3:1 for large display elements.
+  - Keyboard navigation: Full focus-visible rings (2px solid gold with 2px offset).
+  - ARIA attributes: Proper aria-label, aria-expanded, aria-controls, and role="img" / role="dialog".
+  - Screen reader semantic heading order: Strict single H1 per page, followed by H2 and H3.
+  - Respects `prefers-reduced-motion` media query (disables or accelerates all keyframes to 0.01ms).
+
+9.3 PERFORMANCE TARGETS
+  - Google Fonts Inter with `display: swap`.
+  - Next.js Image component optimization with priority loading on hero avatars.
+  - Zero heavy 3D library runtime bundle penalty (orbital math computed purely via CSS & SVG).
+  - Stable scrollbar gutter (`scrollbar-gutter: stable`) to eliminate layout shifts.
+
+
+--------------------------------------------------------------------------------
+10. UI GENERATION PROMPT GUIDE (HOW TO USE FOR DESIGN TOOLS)
+--------------------------------------------------------------------------------
+To generate mockups or components in AI tools (e.g., v0.dev, Midjourney, Figma AI):
+
+Prompt Formula:
+"Design a minimalist-luxury portfolio interface for a software developer named Jyotirmaya Behera.
+Palette: Warm off-white #FAF9F6 (light) and deep charcoal #0D0D0D (dark) with champagne gold #B8860B/#D4A813 highlights.
+Typography: Clean modern sans-serif (Inter) with editorial hierarchy.
+Aesthetic: Zero rounded corners or modern rounded-2xl glassmorphism cards with subtle gold ambient glows.
+Include:
+- Fixed glass navbar with monogram 'JB' and Sun/Moon theme toggle.
+- Hero with headline 'Turning problems into opportunities', circular gold framed avatar, and CTAs.
+- Project cards with live green pulse badges, tech pills, and demo links.
+- Work experience timeline with collapsible takeaways.
+- Unique orbital celestial constellation for skills and social links.
+- Floating 'Let's Talk' contact drawer with validated form."
+
+================================================================================
+END OF SPECIFICATION FILE
+================================================================================

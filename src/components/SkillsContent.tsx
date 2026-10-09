@@ -88,7 +88,7 @@ export default function SkillsContent() {
       aria-label="Technical skills constellation"
     >
       {/* ── Background Subtle Ambient Monochrome Glow ──────────────── */}
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.035),transparent_65%)] dark:bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.04),transparent_65%)]" />
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(circle_at_center,rgba(0,0,0,0.035),transparent_65%)]" />
 
       {/* ── Orbital System Area ───────────────────────────────────────── */}
       <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col items-center justify-center">
@@ -103,7 +103,7 @@ export default function SkillsContent() {
           {orbits.map((orbit) => (
             <div
               key={orbit.id}
-              className={`pointer-events-none absolute rounded-full border border-[var(--border)] ${orbit.opacityClass ?? "opacity-60 dark:opacity-40"}`}
+              className={`pointer-events-none absolute rounded-full border border-[var(--border)] ${orbit.opacityClass ?? "opacity-60"}`}
               style={{ inset: `${orbit.insetPercentage ?? 10}%` }}
               aria-hidden="true"
             />
@@ -111,7 +111,7 @@ export default function SkillsContent() {
 
           {/* ── Center Core Hub ───────────────────────────────────────── */}
           <div
-            className="group absolute z-30 flex size-12 sm:size-16 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--bg-surface)] text-[var(--fg)] shadow-[var(--shadow-lg)] transition-all duration-300 hover:scale-110 hover:border-[var(--fg)] focus-visible:scale-110 focus-visible:outline-none dark:border-white/15 dark:bg-[#181a1d] dark:text-white dark:hover:border-white/45 dark:shadow-[0_0_20px_rgba(255,255,255,0.08)]"
+            className="group absolute z-30 flex size-12 sm:size-16 items-center justify-center rounded-full border border-[var(--border)] bg-[var(--bg-surface)] text-[var(--fg)] shadow-xs transition-all duration-200 hover:border-[var(--fg)] focus-visible:outline-none"
             style={{
               left: "50%",
               top: "50%",
@@ -121,13 +121,13 @@ export default function SkillsContent() {
             aria-label={`${centerHub.label}: ${centerHub.tooltip}`}
           >
             <CenterIcon
-              className="size-5 sm:size-7 transition-transform duration-300 group-hover:scale-110"
+              className="size-5 sm:size-7 transition-transform duration-200"
               aria-hidden="true"
             />
             {/* Tooltip */}
             <span
               role="tooltip"
-              className="pointer-events-none absolute bottom-[calc(100%+0.65rem)] left-1/2 z-50 -translate-x-1/2 whitespace-nowrap rounded-md border border-[var(--border)] bg-[var(--bg-surface)]/95 px-2 py-1 text-[11px] font-medium text-[var(--fg)] opacity-0 shadow-lg backdrop-blur transition-all duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 dark:border-white/15 dark:bg-[#1c1f23]/95 dark:text-white"
+              className="pointer-events-none absolute bottom-[calc(100%+0.65rem)] left-1/2 z-50 -translate-x-1/2 whitespace-nowrap rounded-md border border-[var(--border)] bg-[var(--bg-surface)]/95 px-2 py-1 text-[11px] font-medium text-[var(--fg)] opacity-0 shadow-sm backdrop-blur transition-all duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"
             >
               {centerHub.tooltip}
             </span>
@@ -138,7 +138,6 @@ export default function SkillsContent() {
             orbit.nodes.map((skill) => {
               const Icon = iconsMap[skill.icon] ?? FaCode;
               const iconColor = skill.color ?? brandColors[skill.icon] ?? "var(--fg)";
-              const isMonochrome = iconColor === "var(--fg)";
 
               return (
                 <div
@@ -146,24 +145,13 @@ export default function SkillsContent() {
                   role="img"
                   tabIndex={0}
                   aria-label={skill.name}
-                  className="group absolute z-20 flex size-10 xs:size-11 sm:size-13 md:size-14 items-center justify-center rounded-full transition-transform duration-300 hover:scale-110 focus-visible:scale-110 focus-visible:outline-none cursor-default"
+                  className="group absolute z-20 flex size-10 xs:size-11 sm:size-13 md:size-14 items-center justify-center rounded-full transition-transform duration-200 cursor-default focus-visible:outline-none"
                   style={getSkillNodeStyle(skill, orbit.id)}
                 >
-                  {/* Subtle Brand Aura Glow on Hover */}
-                  <span
-                    className="pointer-events-none absolute -inset-1.5 rounded-full opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-60 group-focus-visible:opacity-60"
-                    style={{
-                      background: isMonochrome
-                        ? "rgba(0, 0, 0, 0.15)"
-                        : `${iconColor}45`,
-                    }}
-                    aria-hidden="true"
-                  />
-
                   {/* Node Surface (Clean Elevated Theme Background) */}
-                  <span className="relative z-10 flex size-full items-center justify-center rounded-full border border-[var(--border)] bg-[var(--bg-surface)] shadow-[var(--shadow-sm)] transition-all duration-200 group-hover:scale-110 group-hover:border-[var(--border-hover)] group-hover:bg-[var(--bg-elevated)] dark:border-white/10 dark:bg-[#191c1f] dark:group-hover:border-white/25">
+                  <span className="relative z-10 flex size-full items-center justify-center rounded-full border border-[var(--border)] bg-[var(--bg-surface)] shadow-xs transition-all duration-200 group-hover:border-[var(--border-hover)] group-hover:bg-[var(--bg-elevated)]">
                     <Icon
-                      className="size-4 sm:size-5 transition-transform duration-300 group-hover:scale-110"
+                      className="size-4 sm:size-5 transition-transform duration-200"
                       style={{ color: iconColor }}
                       aria-hidden="true"
                     />
@@ -172,7 +160,7 @@ export default function SkillsContent() {
                   {/* Clean Tooltip on Hover/Focus */}
                   <span
                     aria-hidden="true"
-                    className="pointer-events-none absolute bottom-[calc(100%+0.65rem)] left-1/2 z-50 hidden -translate-x-1/2 whitespace-nowrap rounded-md border border-[var(--border)] bg-[var(--bg-surface)]/95 px-2 py-1 text-[11px] font-medium text-[var(--fg)] opacity-0 shadow-lg backdrop-blur transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 md:block dark:border-white/15 dark:bg-[#1c1f23]/95 dark:text-white"
+                    className="pointer-events-none absolute bottom-[calc(100%+0.65rem)] left-1/2 z-50 hidden -translate-x-1/2 whitespace-nowrap rounded-md border border-[var(--border)] bg-[var(--bg-surface)]/95 px-2 py-1 text-[11px] font-medium text-[var(--fg)] opacity-0 shadow-sm backdrop-blur transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 md:block"
                   >
                     {skill.name}
                   </span>
@@ -185,11 +173,6 @@ export default function SkillsContent() {
 
       {/* ── Minimal Footer ───────────────────────────────────────────── */}
       <footer className="flex flex-col items-center gap-2 text-[10px] font-medium tracking-[0.16em] text-[var(--fg-subtle)] sm:text-xs">
-        <div className="flex items-center gap-1.5" aria-hidden="true">
-          <span className="size-1 rounded-full bg-[var(--border-hover)]" />
-          <span className="size-1.5 rounded-full bg-[var(--fg-muted)]" />
-          <span className="size-1 rounded-full bg-[var(--border-hover)]" />
-        </div>
         <p>© {new Date().getFullYear()} Jyotirmaya Behera</p>
       </footer>
     </section>

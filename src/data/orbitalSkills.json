@@ -11,7 +11,7 @@
       "priority": 1,
       "radius": 0.245,
       "insetPercentage": 25.5,
-      "opacityClass": "opacity-50 dark:opacity-40",
+      "opacityClass": "opacity-50",
       "nodes": [
         {
           "name": "Python",
@@ -51,7 +51,7 @@
       "priority": 2,
       "radius": 0.35,
       "insetPercentage": 15,
-      "opacityClass": "opacity-60 dark:opacity-50",
+      "opacityClass": "opacity-60",
       "nodes": [
         {
           "name": "React",
@@ -91,7 +91,7 @@
       "priority": 3,
       "radius": 0.455,
       "insetPercentage": 4.5,
-      "opacityClass": "opacity-75 dark:opacity-60",
+      "opacityClass": "opacity-75",
       "nodes": [
         {
           "name": "Docker",

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import AboutContent from "@/components/AboutContent";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "About Jyotirmaya Behera",
@@ -41,7 +42,10 @@ export default function AboutPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(profileJsonLd) }}
       />
-      <AboutContent />
+      <div className="pt-6">
+        <AboutContent />
+      </div>
+      <Footer />
     </>
   );
 }

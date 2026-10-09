@@ -46,8 +46,15 @@ export default function ContactChat() {
     const handlePopState = () => {
       setIsOpen(false);
     };
+    const handleCustomOpen = () => {
+      setIsOpen(true);
+    };
     window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
+    window.addEventListener("open-contact-chat", handleCustomOpen);
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+      window.removeEventListener("open-contact-chat", handleCustomOpen);
+    };
   }, []);
 
   // Close when tapping or clicking on the backpage / outside the panel
@@ -222,7 +229,7 @@ export default function ContactChat() {
       <button
         ref={triggerButtonRef}
         onClick={() => (isOpen ? handleClose() : handleOpen())}
-        className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-40 inline-flex items-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-full bg-[var(--accent)] text-white text-xs sm:text-sm font-medium shadow-md hover:bg-[var(--accent-hover)] hover:shadow-lg transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--accent)]"
+        className="fixed bottom-4 right-4 sm:bottom-5 sm:right-5 z-40 inline-flex items-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-full bg-[var(--accent)] text-white text-xs sm:text-sm font-medium shadow-xs hover:bg-[var(--accent-hover)] hover:shadow-sm transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[var(--accent)]"
         aria-expanded={isOpen}
         aria-controls="contact-chat-panel"
         aria-label={isOpen ? "Close Let's Talk contact panel" : "Open Let's Talk contact panel"}
@@ -261,7 +268,7 @@ export default function ContactChat() {
           role="dialog"
           aria-modal="true"
           aria-labelledby="chat-panel-title"
-          className="fixed z-50 bg-[var(--bg-surface)] border-t sm:border border-[var(--border)] shadow-2xl rounded-t-2xl sm:rounded-2xl flex flex-col overflow-hidden animate-slide-down inset-x-0 bottom-0 max-h-[92dvh] sm:inset-x-auto sm:right-5 sm:bottom-20 sm:w-[380px] sm:max-h-[580px]"
+          className="fixed z-50 bg-[var(--bg-surface)] sm:border border-[var(--border)] shadow-2xl rounded-t-2xl sm:rounded-2xl flex flex-col overflow-hidden animate-slide-down inset-x-0 bottom-0 max-h-[92dvh] sm:inset-x-auto sm:right-5 sm:bottom-20 sm:w-[380px] sm:max-h-[580px]"
         >
           {/* Mobile Sheet Drag Indicator Bar */}
           <div
@@ -270,7 +277,7 @@ export default function ContactChat() {
           />
 
           {/* Header */}
-          <div className="flex items-center justify-between px-4 py-3 sm:px-5 sm:py-4 border-b border-[var(--border)] bg-[var(--bg)] shrink-0">
+          <div className="flex items-center justify-between px-4 py-3 sm:px-5 sm:py-4 bg-[var(--bg)] shrink-0">
             <h2
               id="chat-panel-title"
               className="text-sm sm:text-base font-semibold text-[var(--fg)] tracking-tight"
