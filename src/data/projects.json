@@ -1,9 +1,14 @@
 [
   {
     "id": "netram",
+    "number": "01",
     "name": "Netram",
+    "year": "2024",
     "subtitle": "AI Inspection & Real-Time CCTV Surveillance Platform",
     "summary": "National-level Smart India Hackathon platform for the Ministry of Social Justice and Empowerment. Real-time CCTV streaming, surprise inspection scheduling, WebRTC video conferencing, and AI compliance analytics.",
+    "category": "Full-Stack Development",
+    "status": "Completed",
+    "thumbnail": "/images/projects/netram.svg",
     "challenge": "The Ministry of Social Justice and Empowerment (DoSJE) required an unbiased, automated auditing system to monitor distributed welfare centers across India without predictability or human tampering.",
     "features": [
       "Real-Time CCTV Ingestion: Low-latency RTSP-to-WebRTC stream pipeline supporting 30+ concurrent inspection cameras.",
@@ -17,9 +22,14 @@
   },
   {
     "id": "plantexa",
+    "number": "02",
     "name": "Plantexa",
+    "year": "2024",
     "subtitle": "Two-Stage Deep Learning Plant Disease Diagnosis & Agriculture AI",
     "summary": "A production-ready Streamlit web application that first validates whether an uploaded image is a plant leaf, then detects plant leaf diseases using a TensorFlow MobileNetV2 architecture. Includes detailed disease guidance and an agriculture-only AI assistant powered by the NVIDIA API.",
+    "category": "AI / Machine Learning",
+    "status": "Completed",
+    "thumbnail": "/images/projects/plantexa.svg",
     "challenge": "Real-world field images of crops frequently contain non-foliar noise (soil, hands, tools, or backgrounds) that cause standard single-stage models to produce false-positive disease classifications.",
     "features": [
       "Two-Stage Neural Pipeline: Strict leaf-vs-non-leaf validation gatekeeper before activating disease classification.",
@@ -43,9 +53,14 @@
   },
   {
     "id": "prodexa",
+    "number": "03",
     "name": "Prodexa",
+    "year": "2024",
     "subtitle": "Product Data Aggregator & Multi-Source Curator",
     "summary": "A Flask-based web application that scrapes, curates, and manages product data from multiple e-commerce sources. Provides user authentication, personalized product management, and an intuitive dashboard for browsing and saving products.",
+    "category": "Backend Development",
+    "status": "Completed",
+    "thumbnail": "/images/projects/prodexa.svg",
     "challenge": "E-commerce product listings across multiple third-party marketplaces feature inconsistent schemas, unstable formatting, and strict anti-scraping defenses, requiring resilient automated curation and persistent user workspaces.",
     "features": [
       "Automated Web Scraping: Resilient scraping workers ingesting catalog listings from multiple e-commerce websites.",
@@ -62,9 +77,14 @@
   },
   {
     "id": "aptixa",
+    "number": "04",
     "name": "Aptixa",
+    "year": "2024",
     "subtitle": "Mobile-First Placement Preparation & Quiz Platform",
     "summary": "An all-in-one, mobile-first Placement Preparation & Quiz Platform designed to empower students and job aspirants preparing for campus placements, competitive exams (Bank PO, SSC, CAT, GATE, Railways), and technical interviews.",
+    "category": "Web Applications",
+    "status": "Completed",
+    "thumbnail": "/images/projects/aptixa.svg",
     "challenge": "Aspirants preparing for high-stakes placement rounds lack unified, mobile-friendly platforms that pair textbook-grade quantitative aptitude curriculum with proctored timed simulations and diagnostic feedback.",
     "features": [
       "Complete R.S. Aggarwal Integration: Digital coverage of R.S. Aggarwal's Quantitative Aptitude textbook across 39 chapters and 4,060+ objective-type questions.",

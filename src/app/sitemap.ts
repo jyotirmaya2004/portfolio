@@ -17,11 +17,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     { url: BASE_URL, lastModified: new Date() },
+    { url: `${BASE_URL}/projects`, lastModified: new Date() },
     ...projectEntries,
     ...experienceEntries,
     { url: `${BASE_URL}/about`, lastModified: new Date() },
-    { url: `${BASE_URL}/skills`, lastModified: new Date() },
-    { url: `${BASE_URL}/education`, lastModified: new Date() },
     { url: `${BASE_URL}/contact`, lastModified: new Date() },
   ];
 }

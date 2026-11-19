@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import AboutContent from "@/components/AboutContent";
-import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: "About Jyotirmaya Behera",
@@ -45,7 +44,6 @@ export default function AboutPage() {
       <div className="pt-6">
         <AboutContent />
       </div>
-      <Footer />
     </>
   );
 }

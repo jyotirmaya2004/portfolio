@@ -172,11 +172,6 @@ export default function ContactContent() {
           })}
         </div>
       </div>
-
-      {/* ── Minimal Footer ───────────────────────────────────────────── */}
-      <footer className="flex flex-col items-center gap-2 text-[10px] font-medium tracking-[0.16em] text-[var(--fg-subtle)] sm:text-xs">
-        <p>© {new Date().getFullYear()} Jyotirmaya Behera</p>
-      </footer>
     </section>
   );
 }

@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllProjects, getProjectById } from "@/data/projects";
 import { Icon } from "@/components/ui/Icon";
-import Footer from "@/components/Footer";
 import GsapInit from "@/components/GsapInit";
 
 interface ProjectPageProps {
@@ -93,7 +92,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         {/* Back Link */}
         <div className="pb-8">
           <Link
-            href="/#projects"
+            href="/projects"
             className="group inline-flex items-center gap-2 text-xs uppercase tracking-widest text-[var(--fg-muted)] hover:text-[var(--color-accent)] transition-colors duration-200"
           >
             <Icon
@@ -263,8 +262,6 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           </nav>
         )}
       </article>
-
-      <Footer />
     </>
   );
 }

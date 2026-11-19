@@ -7,7 +7,7 @@ import { Icon } from "@/components/ui/Icon";
 
 const navLinks = [
   { label: "Skills", href: "/#skills" },
-  { label: "Projects", href: "/#projects" },
+  { label: "Projects", href: "/projects" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
@@ -89,7 +89,9 @@ export default function Navbar() {
         {/* Desktop Nav Links */}
         <div className="hidden md:flex items-center gap-7 lg:gap-9 text-[14px] sm:text-[15px] font-medium">
           {navLinks.map((link) => {
-            const isExactRoute = pathname === link.href;
+            const isExactRoute =
+              pathname === link.href ||
+              (link.href === "/projects" && pathname?.startsWith("/projects"));
 
             return (
               <Link
@@ -112,7 +114,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="p-1.5 text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors focus:outline-none"
+            className="p-1.5 text-[var(--color-ink)] hover:text-[var(--color-accent)] transition-colors focus:outline-none cursor-pointer"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
           >

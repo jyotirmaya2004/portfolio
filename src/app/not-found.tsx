@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Icon } from "@/components/ui/Icon";
-import Footer from "@/components/Footer";
 
 export default function NotFound() {
   return (
@@ -23,7 +22,6 @@ export default function NotFound() {
           <span>Return to Projects</span>
         </Link>
       </main>
-      <Footer />
     </>
   );
 }

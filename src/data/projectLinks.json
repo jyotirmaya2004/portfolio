@@ -1,0 +1,26 @@
+[
+  {
+    "id": "netram",
+    "name": "Netram",
+    "liveUrl": "https://netram.kulesika.in",
+    "repoUrl": "https://github.com/biranchikulesika/netram"
+  },
+  {
+    "id": "plantexa",
+    "name": "Plantexa",
+    "liveUrl": "",
+    "repoUrl": "https://github.com/jyotirmaya2004/plantexa"
+  },
+  {
+    "id": "prodexa",
+    "name": "Prodexa",
+    "liveUrl": "",
+    "repoUrl": "https://github.com/jyotirmaya2004/prodexa"
+  },
+  {
+    "id": "aptixa",
+    "name": "Aptixa",
+    "liveUrl": "https://aptixa.jyotirmayabehera.com",
+    "repoUrl": "https://github.com/jyotirmaya2004/aptixa"
+  }
+]

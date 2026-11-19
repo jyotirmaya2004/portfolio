@@ -3,7 +3,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getAllExperiences, getExperienceById } from "@/data/experience";
 import { Icon } from "@/components/ui/Icon";
-import Footer from "@/components/Footer";
 import GsapInit from "@/components/GsapInit";
 
 interface ExperiencePageProps {
@@ -218,8 +217,6 @@ export default async function ExperienceDetailPage({ params }: ExperiencePagePro
           </nav>
         )}
       </article>
-
-      <Footer />
     </>
   );
 }

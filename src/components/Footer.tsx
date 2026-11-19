@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { contactInfo } from "@/data/contact";
+import { projectsData } from "@/data/projects";
 import { Icon } from "@/components/ui/Icon";
 import {
   FaGithub,
@@ -108,7 +109,7 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/skills" className="hover:text-[var(--color-accent)] transition-colors">
+                  <Link href="/#skills" className="hover:text-[var(--color-accent)] transition-colors">
                     Skills Constellation
                   </Link>
                 </li>
@@ -125,57 +126,33 @@ export default function Footer() {
               </ul>
             </div>
 
-            <div>
-              <div className="text-xs font-mono uppercase tracking-widest text-[var(--color-accent)] mb-4 font-semibold">
-                Featured Systems
+            {projectsData.some((p) => Boolean(p.liveUrl || p.githubUrl)) && (
+              <div>
+                <div className="text-xs font-mono uppercase tracking-widest text-[var(--color-accent)] mb-4 font-semibold">
+                  Featured Systems
+                </div>
+                <ul className="space-y-3 text-sm font-medium text-white/75">
+                  {projectsData
+                    .filter((project) => Boolean(project.liveUrl || project.githubUrl))
+                    .map((project) => {
+                      const destination = project.liveUrl || project.githubUrl;
+                      return (
+                        <li key={project.id}>
+                          <a
+                            href={destination}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:text-[var(--color-accent)] transition-colors inline-flex items-center gap-1.5"
+                          >
+                            <span>{project.name}</span>
+                            <span className="text-[10px] text-white/40">↗</span>
+                          </a>
+                        </li>
+                      );
+                    })}
+                </ul>
               </div>
-              <ul className="space-y-3 text-sm font-medium text-white/75">
-                <li>
-                  <a
-                    href="https://netram.vercel.app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[var(--color-accent)] transition-colors inline-flex items-center gap-1.5"
-                  >
-                    <span>Netram (SIH)</span>
-                    <span className="text-[10px] text-white/40">↗</span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/jyotirmaya2004/plantexa"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[var(--color-accent)] transition-colors inline-flex items-center gap-1.5"
-                  >
-                    <span>Plantexa (NIELIT)</span>
-                    <span className="text-[10px] text-white/40">↗</span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://github.com/jyotirmaya2004/prodexa"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[var(--color-accent)] transition-colors inline-flex items-center gap-1.5"
-                  >
-                    <span>Prodexa</span>
-                    <span className="text-[10px] text-white/40">↗</span>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://aptixa.vercel.app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-[var(--color-accent)] transition-colors inline-flex items-center gap-1.5"
-                  >
-                    <span>Aptixa</span>
-                    <span className="text-[10px] text-white/40">↗</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
+            )}
           </div>
         </div>
       </div>
@@ -184,7 +161,6 @@ export default function Footer() {
       <div className="relative z-10">
         <div className="pad-cards mx-auto w-full max-w-[1440px] flex flex-wrap items-center justify-between gap-4 py-6 text-xs text-white/60">
           <span>© 2026 Jyotirmaya Behera. All rights reserved.</span>
-          <span>Crafted with Next.js 16, TypeScript & GSAP</span>
           <button
             type="button"
             onClick={scrollToTop}

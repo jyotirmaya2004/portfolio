@@ -18,24 +18,6 @@
   --color-accent: #c48b28;
   --color-brand-blue: #2563eb;
   --color-footer-blue: #0b1329;
-
-  /* Project card subtle custom tones */
-  --color-card-netram-bg: #faf7f0;
-  --color-card-netram-ink: #1a1915;
-  --color-card-netram-accent: #b47a16;
-  --color-card-plantexa-bg: #f3f8f6;
-  --color-card-plantexa-ink: #121c17;
-  --color-card-plantexa-accent: #117855;
-  --color-card-prodexa-bg: #fbf5f3;
-  --color-card-prodexa-ink: #201514;
-  --color-card-prodexa-accent: #ad3d2f;
-  --color-card-aptixa-bg: #f4f6fc;
-  --color-card-aptixa-ink: #141724;
-  --color-card-aptixa-accent: #2563eb;
-
-  --color-fun-bg: #f4f6fb;
-  --color-fun-ink: #222631;
-
   --bg: #ffffff;
   --bg-surface: #ffffff;
   --bg-elevated: #f8f7f4;
@@ -134,13 +116,6 @@ body {
   font-weight: 400;
 }
 
-.t-body-fun {
-  font-family: var(--font-sans), system-ui, sans-serif;
-  font-size: 14px;
-  line-height: 1.55;
-  font-weight: 400;
-}
-
 .t-cta {
   font-family: var(--font-sans), system-ui, sans-serif;
   font-size: 15px;
@@ -198,93 +173,10 @@ body {
   overflow: visible;
 }
 
-/* ─── Project Cards ──────────────────────────────────────────── */
-.project-card {
-  border-radius: 20px;
-  padding: clamp(28px, 3.5vw, 44px) clamp(24px, 3vw, 40px);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s, border-color 0.3s;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--border);
-}
-
-.project-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
-  border-color: var(--border-hover);
-}
-
-.card-netram {
-  background: var(--color-card-netram-bg);
-  color: var(--color-card-netram-ink);
-  border-color: rgba(180, 122, 22, 0.2);
-}
-.card-netram:hover {
-  border-color: var(--color-card-netram-accent);
-}
-
-.card-plantexa {
-  background: var(--color-card-plantexa-bg);
-  color: var(--color-card-plantexa-ink);
-  border-color: rgba(17, 120, 85, 0.2);
-}
-.card-plantexa:hover {
-  border-color: var(--color-card-plantexa-accent);
-}
-
-.card-prodexa {
-  background: var(--color-card-prodexa-bg);
-  color: var(--color-card-prodexa-ink);
-  border-color: rgba(173, 61, 47, 0.2);
-}
-.card-prodexa:hover {
-  border-color: var(--color-card-prodexa-accent);
-}
-
-.card-aptixa {
-  background: var(--color-card-aptixa-bg);
-  color: var(--color-card-aptixa-ink);
-  border-color: rgba(37, 99, 235, 0.2);
-}
-.card-aptixa:hover {
-  border-color: var(--color-card-aptixa-accent);
-}
-
-/* ─── Highlights / Fun Cards ─────────────────────────────────── */
-.fun-card {
-  border-radius: 14px;
-  background: var(--color-fun-bg);
-  color: var(--color-fun-ink);
-  border: 1px solid var(--border);
-  padding: 24px;
-  min-height: 220px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
-}
-
-.fun-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
-  border-color: var(--border-hover);
-}
-
 /* ─── Sequential Entrance Motion (.seq) ───────────────────────── */
 .seq,
 [data-seq-group] > * {
   will-change: opacity, transform;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .seq,
-  [data-seq-group] > * {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: none !important;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

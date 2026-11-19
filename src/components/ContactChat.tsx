@@ -80,17 +80,6 @@ export default function ContactChat() {
     };
   }, [isOpen]);
 
-  // Listen to open-contact-chat custom event
-  useEffect(() => {
-    const handleOpenEvent = () => {
-      setIsOpen(true);
-    };
-    window.addEventListener("open-contact-chat", handleOpenEvent);
-    return () => {
-      window.removeEventListener("open-contact-chat", handleOpenEvent);
-    };
-  }, []);
-
   // Lock body scroll on mobile when chat panel is open
   useEffect(() => {
     if (isOpen) {

@@ -48,7 +48,7 @@ export default function WorkAndExperience() {
       {/* ─── Experience Track Subsection ─────────────────────────── */}
       <div id="experience" className="space-y-6 pt-16 sm:pt-20">
         <h3 className="text-xs font-mono uppercase tracking-widest text-[var(--color-accent)] font-semibold">
-          Experience & Fellowships
+          Experience & Internships
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 lg:gap-x-16 gap-y-12 sm:gap-y-14">

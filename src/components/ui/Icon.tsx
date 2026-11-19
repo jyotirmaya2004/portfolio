@@ -20,7 +20,8 @@ export interface IconProps extends React.SVGProps<SVGSVGElement> {
     | "menu"
     | "close"
     | "mic"
-    | "check";
+    | "check"
+    | "search";
   size?: number | string;
   className?: string;
 }
@@ -180,6 +181,13 @@ export function Icon({
       return (
         <svg {...commonProps}>
           <polyline points="20 6 9 17 4 12" />
+        </svg>
+      );
+    case "search":
+      return (
+        <svg {...commonProps}>
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
         </svg>
       );
     default:

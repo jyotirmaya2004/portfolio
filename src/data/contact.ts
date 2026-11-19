@@ -54,8 +54,4 @@ export const socialLinks: SocialLink[] = orbitalData.orbits.flatMap((orbit) =>
     orbit: orbit.id as "inner" | "middle" | "outer",
   }))
 );
-
-// Backwards compatibility aliases
-export const coreSocialLinks = socialLinks;
-export const optionalSocialLinks = socialLinks;
 export default orbitalData;

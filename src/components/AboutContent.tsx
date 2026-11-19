@@ -11,18 +11,18 @@ const highlights = [
     iconName: "code" as const,
   },
   {
-    title: "Learning in depth",
-    description: "An Integrated MCA student building strong computer science foundations.",
-    href: "/education",
-    linkLabel: "View education",
-    iconName: "graduation" as const,
+    title: "Engineering track record",
+    description: "Applied research internships, systems engineering, and open source collaboration.",
+    href: "/#experience",
+    linkLabel: "View experience",
+    iconName: "briefcase" as const,
   },
   {
-    title: "Always exploring",
-    description: "Modern web technologies, AI advancements, and open-source collaboration.",
-    href: "/skills",
-    linkLabel: "Explore skills",
-    iconName: "book" as const,
+    title: "Modern stack & tooling",
+    description: "Production web applications, applied AI architectures, and distributed systems.",
+    href: "/#skills",
+    linkLabel: "Explore stack",
+    iconName: "sparkle" as const,
   },
 ];
 
